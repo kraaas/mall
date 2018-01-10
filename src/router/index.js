@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 const Default = r => require.ensure([], () => r(require('../views/layout/Default.vue')), 'Default')
 const Home = r => require.ensure([], () => r(require('../views/home/Home.vue')), 'Home')
-const Topic = r => require.ensure([], () => r(require('../views/topic/Topic.vue')), 'Topic')
 const Sort = r => require.ensure([], () => r(require('../views/sort/Sort.vue')), 'Sort')
 const Cart = r => require.ensure([], () => r(require('../views/cart/Cart.vue')), 'Cart')
 const Me = r => require.ensure([], () => r(require('../views/me/Me.vue')), 'Me')
@@ -25,11 +24,6 @@ const AppRouter = new Router({
           path: '/home',
           name: 'home',
           component: Home
-        },
-        {
-          path: '/topic',
-          name: 'topic',
-          component: Topic
         },
         {
           path: '/sort',

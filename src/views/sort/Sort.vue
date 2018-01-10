@@ -21,9 +21,6 @@
       </div>
     </div>
     <div class="m-subCateList">
-      <div class="banner" v-lazy:background-image="subInfo.currentCategory.wapBannerUrl">
-        <div class="cnt"></div>
-      </div>
       <div class="cateList">
         <div class="hd">
           <span class="text">

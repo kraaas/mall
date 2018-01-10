@@ -254,6 +254,10 @@ textarea {
   box-sizing: content-box;
 }
 
+.swiper-container-vertical .swiper-wrapper {
+  flex-direction: column;
+}
+
 .swiper-slide {
   -webkit-flex-shrink: 0;
   -ms-flex: 0 0 auto;
