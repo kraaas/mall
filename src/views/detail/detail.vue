@@ -14,7 +14,7 @@
           <div class="property">
               <h3 class="property-title">尺寸</h3>
               <ul>
-                  <li class="property-item">4公斤</li>
+                  <li class="property-item active">4公斤</li>
                   <li class="property-item">4公斤</li>
                   <li class="property-item">4公斤</li>
                   <li class="property-item">4公斤</li>
@@ -24,10 +24,18 @@
               <h3 class="property-title">尺寸</h3>
               <ul>
                   <li class="property-item">4公斤</li>
-                  <li class="property-item">4公斤</li>
+                  <li class="property-item active">4公斤</li>
                   <li class="property-item">4公斤</li>
                   <li class="property-item">4公斤</li>
               </ul>
+          </div>
+          <div class="property">
+              <h3 class="property-title">数量</h3>
+              <div class="count">
+                <span class="count-btn reduce">-</span>
+                <input type="text" value="12">
+                <span class="count-btn add">+</span>
+              </div>
           </div>
       </div>
       <div class="decs">
@@ -104,16 +112,39 @@ export default {
     padding: 0 20px;
 }
 .property-title {
-    padding: 20px 0;
+    padding: 30px 0;
 }
 .property-item {
     display: inline-block;
-    padding: 8px;
+    padding: 10px 14px;
     border: 1px solid #bfbaba;
     border-radius: 4px;
     margin-right: 10px;
     font-size: 22px;
     color: #5a5959;
+}
+.property-item.active {
+    border-color:#ec9334;
+    color: #ec9334;
+}
+.coun-btn {
+    flex:1;
+}
+.count input {
+    border: 1px solid #b9b5b5;
+    border-radius: 4px;
+    width: 80px;
+    height: 40px;
+    margin: 0 10px;
+    vertical-align: middle;
+    font-size: 28px;
+    padding: 5px;
+}
+.count-btn {
+    font-size: 36px;
+    vertical-align: middle;
+    padding: 10px;
+    color: #757272;
 }
 .decs-title {
     text-align: center;
@@ -167,7 +198,7 @@ export default {
     width: 70px;
     height: 70px;
     line-height: 70px;
-    opacity: .7;
+    opacity: .5;
     color: #FFF;
     z-index: 100;
 }

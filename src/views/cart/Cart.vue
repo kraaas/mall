@@ -2,15 +2,6 @@
   <div>
     <div class="m-cartHd">
       <span class="logo">购物车</span>
-      <span class="right"></span>
-    </div>
-    <div>
-      <ul class="m-servicePolicy">
-        <li class="item" v-for="(item, index) in serviceList" :key="index">
-          <i class="u-icon u-icon-servicePolicy"></i>
-          <span>{{item.title}}</span>
-        </li>
-      </ul>
     </div>
     <div class="m-defaultPage m-defaultPage-noCart">
       <div class="container">

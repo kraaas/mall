@@ -1,8 +1,11 @@
 <template>
   <div class="m-itemCateListHd">
-    <router-link to="products">
+    <div v-if="showBack" class="back" @click="back">
+      <i class="icon iconfont icon-xiangzuojiantou"></i>
+    </div>
+    <router-link to="products" class="search">
       <div class="m-topSearchIpt ipt">
-        <i class="icon"></i>
+        <i class="icon iconfont icon-sousuo"></i>
         <span class="placeholder">搜索商品</span>
       </div>
     </router-link>
@@ -13,6 +16,7 @@
   import { mapState } from 'vuex'
 
   export default {
+    props: ['showBack'],
     computed: {
       ...mapState([
         'footItems',
@@ -27,12 +31,26 @@
           return
         }
         this.$router.push({path: redirectPath})
+      },
+      back () {
+        this.$router.back()
       }
     }
   }
 </script>
 
 <style scoped>
+  .search{
+    width: 100%;
+  }
+  .back {
+    padding: 20px 20px 20px 40px;
+    margin-left: -39px;
+    color: #827f7f;
+  }
+  .back i {
+    font-size: 28px;
+  }
   .m-itemCateListHd {
     display: -webkit-box;
     display: -webkit-flex;
@@ -48,19 +66,10 @@
     padding: 0 30px;
     background-color: #fff;
     z-index: 101;
-    border-bottom: 1px solid #d9d9d9; /* no */
-  }
-  .back {
-    flex: 1;
-    width: 50px;
-    padding: 0 20px 0 10px;
-    color: #9a9a9a;
-  }
-  .search {
-    flex: 1;
+    border-bottom: 1px solid #f1f1f1; /* no */
   }
   .m-topSearchIpt {
-    width: 690px;
+    width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-flex;
@@ -93,8 +102,11 @@
     display: inline-block;
     width: 28px;
     height: 28px;
+    font-size: 28px;
+    padding-right: 20px;
+    color: #9e9e9e;
   }
   .m-topSearchIpt .placeholder {
-    color: #666;
+    color: #9e9e9e;
   }
 </style>

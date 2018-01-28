@@ -8,7 +8,7 @@
             <div class="info">
               <p class="nickname">{{userInfo.nickname}}</p>
               <div class="membershipLevel">
-                <span class="memberTitle0">{{userInfo.levelTag}}</span>
+                <span class="memberTitle0">13312093473</span>
               </div>
             </div>
           </div>
@@ -16,16 +16,43 @@
       </div>
     </div>
     <div class="g-row">
-      <div class="m-uMenu">
-        <ul class="list">
-          <li class="item" v-for="(item, index) in menuList" :class="Math.ceil((index + 1) / 3) === Math.ceil(menuList.length / 3) ? 'item-bottom' : ''"  :key="index">
-            <a class="m-uMenuItem" :href="item.path">
-              <i class="img u-icon" :class="item.icon"></i>
-              <span class="txt">{{item.title}}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <a>
+            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <span class="txt">我的订单</span>
+            <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a>
+            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <span class="txt">我的订单</span>
+            <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a>
+            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <span class="txt">我的订单</span>
+            <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a>
+            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <span class="txt">我的订单</span>
+            <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a>
+            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <span class="txt">我的订单</span>
+            <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
+          </a>
+        </li>
+      </ul>
     </div>
     <div class="g-row">
       <div class="w-button" @click="logout">退出登录</div>
@@ -60,74 +87,7 @@
     data () {
       return {
         showModal: false,
-        userInfo: {},
-        menuList: [
-          {
-            title: '我的订单',
-            path: 'javascript:;',
-            icon: 'u-icon-ulist'
-          },
-          {
-            title: '周六一起拼',
-            path: 'javascript:;',
-            icon: 'u-icon-upin'
-          },
-          {
-            title: '售后服务',
-            path: 'javascript:;',
-            icon: 'u-icon-uaftersale'
-          },
-          {
-            title: '优惠券',
-            path: 'javascript:;',
-            icon: 'u-icon-ucoupon'
-          },
-          {
-            title: '我的红包',
-            path: 'javascript:;',
-            icon: 'u-icon-uredpacket'
-          },
-          {
-            title: '优先购',
-            path: 'javascript:;',
-            icon: 'u-icon-upreemption'
-          },
-          {
-            title: '礼品卡',
-            path: 'javascript:;',
-            icon: 'u-icon-ugiftcard'
-          },
-          {
-            title: '会员福利',
-            path: 'javascript:;',
-            icon: 'u-icon-umembershipBenefits'
-          },
-          {
-            title: '地址管理',
-            path: 'javascript:;',
-            icon: 'u-icon-uaddress'
-          },
-          {
-            title: '帐号安全',
-            path: 'javascript:;',
-            icon: 'u-icon-usecurity'
-          },
-          {
-            title: '联系客服',
-            path: 'javascript:;',
-            icon: 'u-icon-ukefu'
-          },
-          {
-            title: '帮助中心',
-            path: 'javascript:;',
-            icon: 'u-icon-uhelp'
-          },
-          {
-            title: '意见反馈',
-            path: 'javascript:;',
-            icon: 'u-icon-ufeedback'
-          }
-        ]
+        userInfo: {}
       }
     },
     async created () {
@@ -156,7 +116,7 @@
   }
   .m-profile {
     height: 270px;
-    background-color: #000000;
+    background-color: #b5272d;
     background-size: 100%;
     padding: 0 30px;
     overflow: hidden;
@@ -225,113 +185,21 @@
     vertical-align: middle;
   }
   .m-profile .left .info .membershipLevel span.memberTitle0 {
-    color: #7f7f7f;
-  }
-  .m-uMenu {
-    margin-bottom: 40px;
-    background: #fff;
-  }
-  .m-uMenu .list {
-    zoom: 1;
-  }
-  .m-uMenu .item {
-    float: left;
-    width: 33%;
-    border-right: 1px solid rgba(0,0,0,.15);
-    border-bottom: 1px solid rgba(0,0,0,.15);
-  }
-  .m-uMenu .item-bottom {
-    border-bottom: none;
-  }
-  .m-uMenu .list:after {
-    display: block;
-    clear: both;
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-    content: ".";
-  }
-  .m-uMenuItem {
-    display: block;
-    height: 180px;
-    padding-top: 45px;
-    text-align: center;
-  }
-  .m-uMenuItem .img {
-    width: 50px;
-    height: 50px;
-    vertical-align: middle;
-    margin-bottom: 16px;
-  }
-  .u-icon-ulist {
-    background-position: 0 -480px;
-  }
-  .u-icon-uaddress, .u-icon-uaftersale, .u-icon-ucoupon, .u-icon-ufeedback, .u-icon-ugiftcard, .u-icon-uhelp, .u-icon-ukefu, .u-icon-ulead, .u-icon-ulist,
-  .u-icon-upin, .u-icon-upreemption, .u-icon-uredpacket, .u-icon-usecurity, .u-icon-umembershipBenefits{
-    height: 50px;
-    display: inline-block;
-    vertical-align: middle;
-    background-image: url(../../assets/images/me-icon.png);
-    background-repeat: no-repeat;
-    background-size: 50px 822px;
-    width: 50px;
-  }
-  .m-uMenuItem .txt {
-    display: block;
-    font-size: 24px;
-    line-height: 1;
-    color: #333;
-  }
-  .u-icon-upin {
-    background-position: 0 -592px;
-  }
-  .m-uMenu .item:nth-of-type(3n) {
-    border-right: 0;
-  }
-  .u-icon-uaftersale {
-    background-position: 0 -60px;
-  }
-  .u-icon-ucoupon {
-    background-position: 0 -120px;
-  }
-  .u-icon-uredpacket {
-    background-position: 0 -712px;
-  }
-  .u-icon-upreemption {
-    background-position: 0 -652px;
-  }
-  .u-icon-ugiftcard {
-    background-position: 0 -240px;
-  }
-  .u-icon-umembershipBenefits {
-    background-position: 0 -540px;
-  }
-  .u-icon-uaddress {
-    background-position: 0 0;
-  }
-  .u-icon-usecurity {
-    background-position: 0 -772px;
-  }
-  .u-icon-ukefu {
-    background-position: 0 -360px;
-  }
-  .u-icon-uhelp {
-    background-position: 0 -300px;
-  }
-  .u-icon-ufeedback {
-    background-position: 0 -180px;
+    color: #fff;
   }
   .w-button {
-    display: inline-block;
     vertical-align: middle;
-    width: 100%;
+    width: 90%;
     text-align: center;
-    height: 96px;
-    line-height: 96px;
+    height: 80px;
+    line-height: 80px;
     font-size: 28px;
     background-color: #fff;
     overflow: hidden;
     color: #333;
+    border-radius: 6px;
+    margin: 0 auto;
+
   }
   .logoutModal-layer {
     position: fixed;
@@ -392,5 +260,26 @@
   }
   .m-modal .w-btn-1 {
     color: #b4282d;
+  }
+  .menu-list {
+    background-color: #fff;
+    margin: 30px 0;
+  }
+  .menu-item{
+    position: relative;
+    height: 100px;
+    line-height: 100px;
+    padding: 0 20px;
+    border-bottom: 1px solid #f1f1f1;
+  }
+  .menu-icon {
+    font-size: 36px;
+    padding-right: 10px;
+  }
+  .menu-arrow {
+    position: absolute;
+    right: 20px;
+    font-size: 28px;
+    color: #bfbcbc;
   }
 </style>

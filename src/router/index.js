@@ -8,6 +8,7 @@ const Cart = r => require.ensure([], () => r(require('../views/cart/Cart.vue')),
 const Me = r => require.ensure([], () => r(require('../views/me/Me.vue')), 'Me')
 const Products = r => require.ensure([], () => r(require('../views/products/Products.vue')), 'products')
 const Detail = r => require.ensure([], () => r(require('../views/detail/detail.vue')), 'detail')
+const Login = r => require.ensure([], () => r(require('../views/login/login.vue')), 'Login')
 
 Vue.use(Router)
 
@@ -26,6 +27,11 @@ const AppRouter = new Router({
       path: '/detail',
       name: 'detail',
       component: Detail
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/',

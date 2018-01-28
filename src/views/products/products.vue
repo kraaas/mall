@@ -1,6 +1,6 @@
 <template>
   <div>
-    <search-header />
+    <search-header :showBack="true" />
     <product-list :list="cateList" />
   </div>
 </template>
