@@ -6,6 +6,8 @@ const Home = r => require.ensure([], () => r(require('../views/home/Home.vue')),
 const Sort = r => require.ensure([], () => r(require('../views/sort/Sort.vue')), 'Sort')
 const Cart = r => require.ensure([], () => r(require('../views/cart/Cart.vue')), 'Cart')
 const Me = r => require.ensure([], () => r(require('../views/me/Me.vue')), 'Me')
+const Products = r => require.ensure([], () => r(require('../views/products/Products.vue')), 'products')
+const Detail = r => require.ensure([], () => r(require('../views/detail/detail.vue')), 'detail')
 
 Vue.use(Router)
 
@@ -14,6 +16,16 @@ const AppRouter = new Router({
     {
       path: '/',
       redirect: '/home'
+    },
+    {
+      path: '/products',
+      name: 'products',
+      component: Products
+    },
+    {
+      path: '/detail',
+      name: 'detail',
+      component: Detail
     },
     {
       path: '/',

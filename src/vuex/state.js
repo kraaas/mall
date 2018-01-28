@@ -1,7 +1,3 @@
-/**
- * Created by Administrator on 2017/7/13.
- */
-
 const state = {
   footIdx: 0,
   headTitle: '首页',
@@ -43,28 +39,6 @@ const state = {
     false,
     false,
     false
-  ],
-  navArr: [
-    {
-      router: 'home',
-      title: '首页'
-    },
-    {
-      router: 'new',
-      title: '新游'
-    },
-    {
-      router: 'rank',
-      title: '排行'
-    },
-    {
-      router: 'news',
-      title: '资讯'
-    },
-    {
-      router: 'profile',
-      title: '个人中心'
-    }
   ]
 }
 

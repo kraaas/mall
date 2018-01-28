@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div class="m-itemCateListHd">
-      <div class="m-topSearchIpt ipt">
-        <i class="icon"></i>
-        <span class="placeholder">搜索商品</span>
-      </div>
-    </div>
+    <search-header />
     <div class="m-cateNavVertWrap" style="left:0;">
       <div class="sort-swiper">
         <swiper :options="swiperOption" class="swiper-wrapper-cls">
@@ -45,6 +40,7 @@
 <script>
   import * as types from '../../vuex/mutation-types'
   import model from './SortModel'
+  import SearchHeader from '../common/SearchHeader.vue'
 
   export default {
     data () {
@@ -97,6 +93,9 @@
         }
         this.refreshSubCategory()
       }
+    },
+    components: {
+      SearchHeader
     }
   }
 </script>
@@ -105,64 +104,7 @@
   .swiper-wrapper-cls {
     flex-direction: column;
   }
-  .m-itemCateListHd {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    align-items: center;
-    height: 88px;
-    padding: 0 30px;
-    background-color: #fff;
-    left: 0;
-    top: 0;
-    position: fixed;
-    z-index: 101;
-    border-bottom: 1px solid #d9d9d9; /* no */
-  }
-  .m-topSearchIpt {
-    width: 690px;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-flow: row nowrap;
-    -moz-flex-flow: row nowrap;
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    justify-content: center;
-    height: 56px;
-    font-size: 28px;
-    background-color: #ededed;
-    border-radius: 8px;
-  }
-  .m-topSearchIpt .icon {
-    vertical-align: middle;
-    background-repeat: no-repeat;
-    background-size: 28px 28px;
-    margin-right: 10px;
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-  }
-  .m-topSearchIpt .placeholder {
-    color: #666;
-  }
+  
   .m-cateNavVertWrap {
     position: fixed;
     top: 88px;

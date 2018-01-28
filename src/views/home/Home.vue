@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div class="banner">
-      <swiper class="banner-swiper" :options="bannerSwiperOption">
-        <swiper-slide class="banner-img" v-for="(banner, index) in banners" :key="index">
-          <img v-lazy="banner.picUrl" alt="">
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
-    </div>
+    <search-header />
     <div class="cateMenu">
       <div class="cateMenu-item" v-for="(cate, index) in cateList" :key="index">
         <a href="javascript:;">
@@ -21,20 +14,24 @@
       </div>
     </div>
     <div class="newGoods">
-      <div class="brand-title">
+      <div class="newGoods-title">
         <span>今日特价</span>
       </div>
       <div class="newGoods-item">
         <swiper class="newGoods-swiper" :options="swiperOption">
-          <swiper-slide class="newGoods-slide" v-for="(item, index) in newItemList" :key="index">
-            <a class="good" href="javascript:;">
+          <swiper-slide 
+            class="newGoods-slide" 
+            v-for="(item, index) in newItemList" 
+            :key="index"
+          >
+            <router-link to="products" class="good">
               <div class="good-img"><img v-lazy="item.listPicUrl"></div>
               <div class="good-name">{{item.name}}</div>
               <div class="good-price">
                 <span>¥{{item.retailPrice}}</span>
                 <span class="good-price-earn">赚:¥{{item.retailPrice}}</span>
               </div>
-            </a>
+            </router-link>
           </swiper-slide>
         </swiper>
       </div>
@@ -43,19 +40,7 @@
       <div class="cate-grid">
         <h3 class="title">{{cate.name}}好物</h3>
         <div class="cate-goods">
-          <ul class="list">
-            <li class="item" v-for="(item, idx) in cate.itemList" :key="idx">
-              <a class="good" href="javascript:;">
-                <div class="hd">
-                  <div class="wraper">
-                    <img v-lazy="item.listPicUrl">
-                  </div>
-                </div>
-                <div class="name">{{item.name}}</div>
-                <div class="price">¥{{item.retailPrice}}</div>
-              </a>
-            </li>
-          </ul>
+          <product-list :list="cate.itemList" />
         </div>
       </div>
     </div>
@@ -65,36 +50,17 @@
 <script>
   import * as types from '../../vuex/mutation-types'
   import model from './HomeModel'
+  import SearchHeader from '../common/SearchHeader.vue'
+  import ProductList from '../common/ProductList.vue'
 
   export default {
     data () {
       return {
         cateList: [],
-        tagList: [],
         newItemList: [],
-        popularItemList: [],
-        topicList: [],
-        bannerSwiperOption: {
-          pagination: '.swiper-pagination',
-          paginationClickable: true,
-          setWrapperSize: true,
-          autoplay: 3000,
-          updateOnImagesReady: true,
-          autoplayDisableOnInteraction: false
-        },
-        menuSwiperOption: {
-          slidesPerView: 5,
-          spaceBetween: 10,
-          setWrapperSize: true
-        },
         swiperOption: {
           slidesPerView: 2.5,
           spaceBetween: 10,
-          setWrapperSize: true
-        },
-        topicsSwiperOption: {
-          slidesPerView: 1.2,
-          spaceBetween: 20,
           setWrapperSize: true
         }
       }
@@ -102,14 +68,14 @@
     async created () {
       document.title = '移动端商城--首页'
       this.$store.commit(types.CLICK_FOOT_ICON, 0)
-      this.banners = model.focusList
-      this.tagList = model.tagList
       this.newItemList = model.newItemList
-      this.popularItemList = model.popularItemList
-      this.topicList = model.topicList
       this.cateList = model.cateList
     },
     methods: {
+    },
+    components: {
+      SearchHeader,
+      ProductList
     }
   }
 </script>
@@ -147,116 +113,16 @@
     font-size: 24px;
     line-height: 28px;
   }
-  .brand {
-    color: #333;
-    background-color: #fff;
-  }
-  .brand-title {
-    font-size: 32px;
-    display: flex;
-    -webkit-flex-flow: row nowrap;
-    -moz-flex-flow: row nowrap;
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    justify-content: center;
-    height: 100px;
-  }
-  .brand-icon {
-    margin-left: 10px;
-    display: inline-block;
-    vertical-align: middle;
-    background-image: url(../../assets/images/ppzzszg.png);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    width: 30px;
-    height: 30px;
-  }
-  .brand-container {
-    padding-bottom: 10px;
-  }
-  .brand-list {
-    margin: 0 16px;
-    height: 468px;
-    overflow: hidden;
-  }
-  .brand-item {
-    display: inline-block;
-    position: relative;
-    margin-bottom: 8px;
-    width: 355px;
-    height: 236px;
-    overflow: hidden;
-  }
-  .brand-item:nth-child(2n+1)
-  {
-    margin-right: 8px;
-  }
-  .brand-cnt {
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 20px 0 0 20px;
-    width: 100%;
-    z-index: 4;
-  }
-  .brand-item img {
-    background-color: #f4f4f4;
-    width: 355px;
-    height: 236px;
-  }
-  .brand-cnt .title {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    color: #333;
-    font-size: 28px;
-    line-height: 34px;
-    margin-bottom: 6px;
-  }
-  .brand-cnt .price1 {
-    color: #333;
-    font-size: 26px;
-    line-height: 34px;
-  }
-  .brand-cnt .price2 {
-    color: #333;
-    font-size: 27px;
-    line-height: 34px;
-  }
   .newGoods {
     margin-bottom: 20px;
     background-color: #fff;
   }
-  .newGoods-hd {
-    background: url(../../assets/images/zofjx.png);
-    background-size: 750px 260px;
-    margin-bottom: 32px;
-    height: 260px;
-    display: flex;
-    -webkit-flex-flow: row nowrap;
-    -moz-flex-flow: row nowrap;
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    justify-content: center;
-    font-size: 32px;
+  .newGoods-title {
+    line-height: 1.6rem;
+    text-align: center;
+    font-size: 0.373333rem;
+    color: #333;
+    background-color: #fff;
   }
   .newGoods-txt {
     display: block;
@@ -320,105 +186,6 @@
     text-align: left;
     color: #b4282d;
   }
-  .good-price-earn {
-    font-size: 22px;
-    padding-left: 20px;
-  }
-  .popularItem {
-    margin-bottom: 20px;
-    background-color: #fff;
-  }
-  .popularItem-hd {
-    background: url(../../assets/images/rqtj.png);
-  }
-  .popularItem-more {
-    color: #B4A078;
-  }
-  .popularItem-all {
-    background: #F4E9CB;
-  }
-  .welfare {
-    width: 750px;
-    height: 300px;
-    margin-bottom: 20px;
-  }
-  .welfare-more {
-    width: 100%;
-    height: 100%;
-    display: block;
-    background-image: url(../../assets/images/yxfl.png);
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .topics {
-    padding: 0 30px 36px;
-    overflow: hidden;
-  }
-  .topics-swiper {
-
-  }
-  .topics-slide {
-    float: left;
-    width: 575px;
-  }
-  .topics-slide-item {
-    display: block;
-  }
-  .topics-slide-img {
-    width:  575px;
-    height: 322px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .topics-slide-img img {
-    height: 100%;
-    width: auto;
-    position: relative;
-    left: 50%;
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-  }
-  .topics-hd {
-    height: 41px;
-    margin-bottom: 2px;
-    zoom: 1;
-    text-decoration: none;
-    outline: 0;
-  }
-  .topics-title {
-    white-space: nowrap;
-    overflow: hidden;
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    width: 410px;
-    float: left;
-    font-size: 28px;
-    color: #333;
-  }
-  .topics-price {
-    float: right;
-    font-size: 28px;
-    color: #b4282d;
-  }
-  .topics-desc {
-    white-space: nowrap;
-    overflow: hidden;
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    width: 575px;
-    font-size: 24px;
-    color: #7F7F7F;
-  }
   .cate {
     margin-bottom: 20px;
     background-color: #fff;
@@ -435,69 +202,5 @@
   }
   .cate-goods {
     background-color: #fff;
-  }
-  .cate-goods .list {
-    position: relative;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .cate-goods .list .item {
-    float: left;
-    position: relative;
-    width: 370px;
-    padding: 0 10px 33px;
-    overflow: hidden;
-    background-color: #fff;
-  }
-  .cate-goods .list .item:nth-child(2n+1) {
-    padding: 0 10px 33px 20px;
-  }
-  .cate-goods .list .item .good {
-    width: 100%;
-  }
-  .cate-goods .list .item .hd {
-    border-radius: 4px;
-    position: relative;
-    z-index: 0;
-    background-color: #f4f4f4;
-  }
-  .cate-goods .list .item .good .wraper {
-  }
-  .cate-goods .list .item .hd img{
-    display: block;
-    width: 100%;
-    height: 345px;
-    border-radius: 4px 4px 0 0;
-    background-color: #f4f4f4;
-  }
-  .cate-goods .list .item .hd .desc{
-    background: #F1ECE2;
-    border-radius: 0 0 4px 4px;
-    font-size: 24px;
-    color: #9F8A60;
-    letter-spacing: 0;
-    line-height: 29px;
-    padding: 20px 10px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-  .cate-goods .list .item .name {
-    margin: 20px auto 10px;
-    padding: 0 10px;
-    line-height: 1;
-    text-align: left;
-    font-size: 28px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    color: #333;
-  }
-  .cate-goods .list .item .price {
-    line-height: 1;
-    font-size: 33px;
-    text-align: left;
-    color: #b4282d;
-    padding: 20px 10px;
   }
 </style>
