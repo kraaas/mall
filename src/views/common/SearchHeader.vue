@@ -37,6 +37,11 @@
         'footIdx'
       ])
     },
+    created() {
+      window.apiready = function() {
+          $api.fixStatusBar(this.$el)
+      }
+    },
     methods: {
       goFooterPath (idx) {
         let curPath = this.$route.path
@@ -96,6 +101,7 @@
     padding: 0 30px;
     background-color: #fff;
     z-index: 101;
+    box-sizing: content-box;
     border-bottom: 1px solid #f1f1f1; /* no */
   }
   .m-topSearchIpt {

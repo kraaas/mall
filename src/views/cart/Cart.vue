@@ -3,71 +3,77 @@
     <div class="m-cartHd">
       <span class="logo">购物车</span>
     </div>
-    <ul class="products">
-      <li class="prod-item">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox">
-          </label>
-        </div>
-        <div class="img">
-          <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
-        </div>
-        <div class="info">
-          <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
-          <p class="type"> 土豪金 - 64g</p>
-          <p class="count">
-            <span class="number">数量：2</span>
-            <span class="price">售价：145元</span>
-          </p>
-        </div>
-        <div class="delete">
-          <i class="iconfont icon-lajixiang"></i>
-        </div>
-      </li>
-      <li class="prod-item">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox">
-          </label>
-        </div>
-        <div class="img">
-          <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
-        </div>
-        <div class="info">
-          <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
-          <p class="type"> 土豪金 - 64g</p>
-          <p class="count">
-            <span class="number">数量：2</span>
-            <span class="price">售价：145元</span>
-          </p>
-        </div>
-        <div class="delete">
-          <i class="iconfont icon-lajixiang"></i>
-        </div>
-      </li>
-      <li class="prod-item">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox">
-          </label>
-        </div>
-        <div class="img">
-          <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
-        </div>
-        <div class="info">
-          <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
-          <p class="type"> 土豪金 - 64g</p>
-          <p class="count">
-            <span class="number">数量：2</span>
-            <span class="price">售价：145元</span>
-          </p>
-        </div>
-        <div class="delete">
-          <i class="iconfont icon-lajixiang"></i>
-        </div>
-      </li>
-    </ul>
+    <div class="has-data">
+      <ul class="products">
+        <li class="prod-item">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">
+            </label>
+          </div>
+          <div class="img">
+            <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
+          </div>
+          <div class="info">
+            <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
+            <p class="type"> 土豪金 - 64g</p>
+            <p class="count">
+              <span class="number">数量：2</span>
+              <span class="price">售价：145元</span>
+            </p>
+          </div>
+          <div class="delete">
+            <i class="iconfont icon-lajixiang"></i>
+          </div>
+        </li>
+        <li class="prod-item">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">
+            </label>
+          </div>
+          <div class="img">
+            <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
+          </div>
+          <div class="info">
+            <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
+            <p class="type"> 土豪金 - 64g</p>
+            <p class="count">
+              <span class="number">数量：2</span>
+              <span class="price">售价：145元</span>
+            </p>
+          </div>
+          <div class="delete">
+            <i class="iconfont icon-lajixiang"></i>
+          </div>
+        </li>
+        <li class="prod-item">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">
+            </label>
+          </div>
+          <div class="img">
+            <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
+          </div>
+          <div class="info">
+            <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
+            <p class="type"> 土豪金 - 64g</p>
+            <p class="count">
+              <span class="number">数量：2</span>
+              <span class="price">售价：145元</span>
+            </p>
+          </div>
+          <div class="delete">
+            <i class="iconfont icon-lajixiang"></i>
+          </div>
+        </li>
+      </ul>
+      <div class="footer">
+          <div class="footer-price">总价: <span class="price">$123.34</span></div>
+          <div class="footer-btn">立即结算</div>
+      </div>
+    </div>
     <div v-if="false" class="m-defaultPage m-defaultPage-noCart">
       <div class="container">
         <div class="img"></div>
@@ -114,9 +120,8 @@
   padding: 4vw 2vw;
   position: relative;
   height: 250px;
-  border-bottom-color: rgba(185, 185, 185, 0.14);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border: 1px solid rgba(185, 185, 185, 0.14);
+  background-color: #fff;
 }
 .prod-item .checkbox input{ 
   width: 30px;
@@ -226,5 +231,41 @@
   font-size: 28px;
   line-height: 1;
   color: #999;
+}
+.footer {
+    position: fixed;
+    bottom: 100px;
+    height: 99px;
+    width: 100%;
+    background-color: #fafafa;
+    border-top: 1px solid #d6d6d6;
+    display: flex;
+    -moz-flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    -ms-flex-pack: distribute;
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    justify-content: space-around;
+}
+.footer-price {
+    flex: 1;
+    padding-left: 20px;
+}
+.footer-price .price {
+    color: #ce352d;
+}
+.footer-btn {
+    flex: 1;
+    height: 100%;
+    line-height: 99px;
+    text-align: center;
+    color: #fff;
+    background-color: #ec9334
 }
 </style>
