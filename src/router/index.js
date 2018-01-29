@@ -9,6 +9,7 @@ const Me = r => require.ensure([], () => r(require('../views/me/Me.vue')), 'Me')
 const Products = r => require.ensure([], () => r(require('../views/products/Products.vue')), 'products')
 const Detail = r => require.ensure([], () => r(require('../views/detail/detail.vue')), 'detail')
 const Login = r => require.ensure([], () => r(require('../views/login/login.vue')), 'Login')
+const Search = r => require.ensure([], () => r(require('../views/search/Search.vue')), 'search')
 
 Vue.use(Router)
 
@@ -32,6 +33,11 @@ const AppRouter = new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
     },
     {
       path: '/',

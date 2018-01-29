@@ -3,12 +3,21 @@
     <div v-if="showBack" class="back" @click="back">
       <i class="icon iconfont icon-xiangzuojiantou"></i>
     </div>
-    <router-link to="products" class="search">
-      <div class="m-topSearchIpt ipt">
+    <router-link 
+      to="search" 
+      class="search"
+      v-if="!showInput"
+    >
+      <div class="m-topSearchIpt">
         <i class="icon iconfont icon-sousuo"></i>
         <span class="placeholder">搜索商品</span>
       </div>
     </router-link>
+    <div class="m-topSearchIpt hasinput" :class="{focused}" v-if="showInput">
+      <i class="icon iconfont icon-sousuo"></i>
+      <span v-if="!focused" class="placeholder">搜索商品</span>
+      <input type="text" @focus="inputFocus">
+    </div>
   </div>
 </template>
 
@@ -16,7 +25,12 @@
   import { mapState } from 'vuex'
 
   export default {
-    props: ['showBack'],
+    props: ['showBack', 'showInput'],
+    data () {
+      return {
+        focused: false
+      }
+    },
     computed: {
       ...mapState([
         'footItems',
@@ -34,6 +48,9 @@
       },
       back () {
         this.$router.back()
+      },
+      inputFocus () {
+        this.focused = true
       }
     }
   }
@@ -50,6 +67,19 @@
   }
   .back i {
     font-size: 28px;
+  }
+  .hasinput input {
+    border: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: transparent;
+    font-size: 28px;
+    padding-left: 70px;
+  }
+  .hasinput.focused .icon {
+    position: absolute;
+    left: 20px;
   }
   .m-itemCateListHd {
     display: -webkit-box;
@@ -69,6 +99,7 @@
     border-bottom: 1px solid #f1f1f1; /* no */
   }
   .m-topSearchIpt {
+    position: relative;
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;

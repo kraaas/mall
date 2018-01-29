@@ -9,6 +9,9 @@ ol,
 ul {
   list-style: none;
 }
+.iconfont {
+  font-size: 28px;
+}
 
 @-webkit-keyframes van-slide-bottom-enter {
   from {
