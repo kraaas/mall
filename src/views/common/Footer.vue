@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="footer fixTabBar">
     <div class="footer-item" :class="footItems[0].itemClass" @click="goFooterPath(0)">
       <i class="icon" :class="footItems[0].iconClass"></i>
       <span class="txt">首页</span>

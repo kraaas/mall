@@ -1,5 +1,5 @@
 <template>
-  <div class="m-itemCateListHd">
+  <div class="m-itemCateListHd fixStatusBar">
     <div v-if="showBack" class="back" @click="back">
       <i class="icon iconfont icon-xiangzuojiantou"></i>
     </div>
@@ -36,11 +36,6 @@
         'footItems',
         'footIdx'
       ])
-    },
-    created() {
-      window.apiready = function() {
-          $api.fixStatusBar(this.$el)
-      }
     },
     methods: {
       goFooterPath (idx) {

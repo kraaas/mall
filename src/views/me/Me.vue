@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="g-row">
+    <div class="g-row fixStatusBar">
       <div class="m-profile">
         <div class="g-row">
           <div class="left">
