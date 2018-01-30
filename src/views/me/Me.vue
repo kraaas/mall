@@ -20,7 +20,7 @@
         <li class="menu-item">
           <a>
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
-            <span class="txt">我的订单</span>
+            <span class="txt">我的资料</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </a>
         </li>
@@ -34,21 +34,21 @@
         <li class="menu-item">
           <a>
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
-            <span class="txt">我的订单</span>
+            <span class="txt">地址管理</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </a>
         </li>
         <li class="menu-item">
           <a>
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
-            <span class="txt">我的订单</span>
+            <span class="txt">修改密码</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </a>
         </li>
         <li class="menu-item">
           <a>
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
-            <span class="txt">我的订单</span>
+            <span class="txt">联系我们</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </a>
         </li>
