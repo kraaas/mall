@@ -234,7 +234,7 @@
 }
 .footer {
     position: fixed;
-    bottom: 100px;
+    bottom: 0px;
     height: 99px;
     width: 100%;
     background-color: #fafafa;

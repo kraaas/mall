@@ -18,39 +18,39 @@
     <div class="g-row">
       <ul class="menu-list">
         <li class="menu-item">
-          <a>
+          <router-link to="account">
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
             <span class="txt">我的资料</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
-          </a>
+          </router-link>
         </li>
         <li class="menu-item">
-          <a>
+          <router-link to="orderList">
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
             <span class="txt">我的订单</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
-          </a>
+          </router-link>
         </li>
         <li class="menu-item">
-          <a>
+          <router-link to="address">
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
             <span class="txt">地址管理</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
-          </a>
+          </router-link>
         </li>
         <li class="menu-item">
-          <a>
+          <router-link to="updatePwd">
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
             <span class="txt">修改密码</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
-          </a>
+          </router-link>
         </li>
         <li class="menu-item">
-          <a>
+          <router-link to="concat">
             <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
             <span class="txt">联系我们</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -265,12 +265,18 @@
     background-color: #fff;
     margin: 30px 0;
   }
-  .menu-item{
+  .menu-item {
     position: relative;
     height: 100px;
     line-height: 100px;
-    padding: 0 20px;
     border-bottom: 1px solid #f1f1f1;
+  }
+  .menu-item a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    color: #333;
   }
   .menu-icon {
     font-size: 36px;

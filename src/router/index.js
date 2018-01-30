@@ -9,7 +9,12 @@ const Me = r => require.ensure([], () => r(require('../views/me/Me.vue')), 'Me')
 const Products = r => require.ensure([], () => r(require('../views/products/Products.vue')), 'products')
 const Detail = r => require.ensure([], () => r(require('../views/detail/detail.vue')), 'detail')
 const Login = r => require.ensure([], () => r(require('../views/login/login.vue')), 'Login')
-const Search = r => require.ensure([], () => r(require('../views/search/Search.vue')), 'search')
+const Search = r => require.ensure([], () => r(require('../views/search/Search.vue')), 'Search')
+const Account = r => require.ensure([], () => r(require('../views/me/Account.vue')), 'Account')
+const Address = r => require.ensure([], () => r(require('../views/me/Address.vue')), 'Address')
+const Concat = r => require.ensure([], () => r(require('../views/me/Concat.vue')), 'Concat')
+const OrderList = r => require.ensure([], () => r(require('../views/me/OrderList.vue')), 'OrderList')
+const UpdatePwd = r => require.ensure([], () => r(require('../views/me/UpdatePwd.vue')), 'UpdatePwd')
 
 Vue.use(Router)
 
@@ -18,6 +23,11 @@ const AppRouter = new Router({
     {
       path: '/',
       redirect: '/home'
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart
     },
     {
       path: '/products',
@@ -40,6 +50,31 @@ const AppRouter = new Router({
       component: Search
     },
     {
+      path: '/account',
+      name: 'Account',
+      component: Account
+    },
+    {
+      path: '/address',
+      name: 'Address',
+      component: Address
+    },
+    {
+      path: '/concat',
+      name: 'Concat',
+      component: Concat
+    },
+    {
+      path: '/orderList',
+      name: 'OrderList',
+      component: OrderList
+    },
+    {
+      path: '/updatePwd',
+      name: 'UpdatePwd',
+      component: UpdatePwd
+    },
+    {
       path: '/',
       name: '',
       component: Default,
@@ -53,11 +88,6 @@ const AppRouter = new Router({
           path: '/sort',
           name: 'sort',
           component: Sort
-        },
-        {
-          path: '/cart',
-          name: 'cart',
-          component: Cart
         },
         {
           path: '/me',
