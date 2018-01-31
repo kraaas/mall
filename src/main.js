@@ -10,7 +10,7 @@ import store from './vuex/index'
 import FastClick from 'fastclick'
 import VueSwesomeSwiper from 'vue-awesome-swiper'
 import VueLazyload from 'vue-lazyload'
-import Mint, { Header } from 'mint-ui'
+import Mint from 'mint-ui'
 import HeaderBack from './views/common/HeaderBack.vue'
 
 Vue.use(VueSwesomeSwiper)
@@ -21,7 +21,6 @@ Vue.use(VueLazyload, {
     attempt: 1
 })
 Vue.use(Mint)
-Vue.component(Header.name, Header)
 Vue.component(HeaderBack.name, HeaderBack)
 
 const cnzzProtocol = ((document.location.protocol === 'https:') ? "https://" : "http://")
