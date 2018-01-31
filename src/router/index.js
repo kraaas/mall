@@ -25,11 +25,6 @@ const AppRouter = new Router({
       redirect: '/home'
     },
     {
-      path: '/cart',
-      name: 'cart',
-      component: Cart
-    },
-    {
       path: '/products',
       name: 'products',
       component: Products
@@ -88,6 +83,11 @@ const AppRouter = new Router({
           path: '/sort',
           name: 'sort',
           component: Sort
+        },
+        {
+          path: '/cart',
+          name: 'cart',
+          component: Cart
         },
         {
           path: '/me',

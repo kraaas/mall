@@ -1,5 +1,7 @@
 <template>
-  <div class="account">me</div>
+  <header-back title="联系我们">
+    <p>sdfsdf</p>
+  </header-back>
 </template>
 <script>
 export default {

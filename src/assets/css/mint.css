@@ -20,14 +20,14 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: #26a2ff;
+    background-color: #b4282d;
     box-sizing: border-box;
     color: #fff;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     font-size: 28px;
-    height: 80px;
+    min-height: 88px;
     line-height: 1;
     padding: 0 20px;
     position: relative;
@@ -160,13 +160,13 @@
 
 .mint-button--primary {
     color: #fff;
-    background-color: #26a2ff
+    background-color: #b4282d
 }
 
 .mint-button--primary.is-plain {
-    border: 2px solid #26a2ff;
+    border: 2px solid #b4282d;
     background-color: transparent;
-    color: #26a2ff
+    color: #b4282d
 }
 
 .mint-button--danger {
@@ -545,7 +545,7 @@
 }
 
 .mint-badge.is-primary {
-    background-color: #26a2ff
+    background-color: #b4282d
 }
 
 .mint-badge.is-success {
@@ -635,8 +635,8 @@
 }
 
 .mint-switch-input:checked+.mint-switch-core {
-    border-color: #26a2ff;
-    background-color: #26a2ff;
+    border-color: #b4282d;
+    background-color: #b4282d;
 }
 
 .mint-switch-input:checked+.mint-switch-core::before {
@@ -1035,8 +1035,8 @@
 }
 
 .mint-navbar .mint-tab-item.is-selected {
-    border-bottom: 6px solid #26a2ff;
-    color: #26a2ff;
+    border-bottom: 6px solid #b4282d;
+    color: #b4282d;
     margin-bottom: -6px;
 }
 
@@ -1086,7 +1086,7 @@
 
 .mint-tabbar>.mint-tab-item.is-selected {
     background-color: #eaeaea;
-    color: #26a2ff;
+    color: #b4282d;
 }
 
 .mint-tabbar.is-fixed {
@@ -1168,7 +1168,7 @@
 }
 
 .mint-searchbar-cancel {
-    color: #26a2ff;
+    color: #b4282d;
     margin-left: 20px;
     text-decoration: none;
 }
@@ -1238,8 +1238,8 @@
 }
 
 .mint-checkbox-input:checked+.mint-checkbox-core {
-    background-color: #26a2ff;
-    border-color: #26a2ff;
+    background-color: #b4282d;
+    border-color: #b4282d;
 }
 
 .mint-checkbox-input:checked+.mint-checkbox-core::after {
@@ -1332,8 +1332,8 @@
 }
 
 .mint-radio-input:checked+.mint-radio-core {
-    background-color: #26a2ff;
-    border-color: #26a2ff;
+    background-color: #b4282d;
+    border-color: #b4282d;
 }
 
 .mint-radio-input:checked+.mint-radio-core::after {
@@ -1692,7 +1692,7 @@
 .mt-range-progress {
     position: absolute;
     display: block;
-    background-color: #26a2ff;
+    background-color: #b4282d;
     top: 50%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
@@ -1908,7 +1908,7 @@
 .mt-progress-progress {
     position: absolute;
     display: block;
-    background-color: #26a2ff;
+    background-color: #b4282d;
     top: 50%;
     -webkit-transform: translate(0, -50%);
     transform: translate(0, -50%);
@@ -2124,12 +2124,12 @@
 }
 
 .mint-msgbox-confirm {
-    color: #26a2ff;
+    color: #b4282d;
     width: 50%;
 }
 
 .mint-msgbox-confirm:active {
-    color: #26a2ff;
+    color: #b4282d;
 }
 
 .msgbox-bounce-enter {
@@ -2230,7 +2230,7 @@
     text-align: center;
     line-height: 80px;
     font-size: 32px;
-    color: #26a2ff;
+    color: #b4282d;
 }
 
 .mint-datetime-cancel {

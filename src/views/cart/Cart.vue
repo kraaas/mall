@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="m-cartHd">
+    <div class="m-cartHd fixStatusBar">
       <span class="logo">购物车</span>
     </div>
     <div class="has-data">
@@ -234,7 +234,7 @@
 }
 .footer {
     position: fixed;
-    bottom: 0px;
+    bottom: 100px;
     height: 99px;
     width: 100%;
     background-color: #fafafa;

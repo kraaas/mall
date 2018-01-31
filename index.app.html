@@ -22,7 +22,7 @@
         style.rel = 'stylesheet';
         var fixTop = api.safeArea.top
         var fixBottom = api.safeArea.bottom
-        style.appendChild(document.createTextNode('.fixStatusBar {padding-top:' + fixTop + 'px!important;}.fixTabBar{padding-bottom:' + fixBottom + 'px!important;}'));
+        style.appendChild(document.createTextNode('.fixStatusBar {padding-top:' + fixTop + 'px!important;}.fixTabBar{padding-bottom:' + fixBottom + 'px!important;}.fixTabBar .content{margin-top:' +(88 + fixBottom)  + 'px!important;}'));
         var head = document.getElementsByTagName('head')[0];
         head.appendChild(style);
       }

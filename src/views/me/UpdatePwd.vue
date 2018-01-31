@@ -1,5 +1,7 @@
 <template>
-  <div class="account">me</div>
+  <header-back title="修改密码">
+    <p>sdfsdf</p>
+  </header-back>
 </template>
 <script>
 export default {
