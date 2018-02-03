@@ -3,32 +3,34 @@
     <div class="m-cartHd fixStatusBar">
       <span class="logo">购物车</span>
     </div>
-    <div class="has-data">
+    <div v-if="cartList.length" class="has-data">
       <ul class="products">
-        <li class="prod-item" v-for="i in 4">
-          <check-box></check-box>
-          <div class="img">
-            <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
-          </div>
-          <div class="info">
-            <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
-            <p class="type"> 土豪金 - 64g</p>
-            <p class="count">
-              <span class="number">数量：2</span>
-              <span class="price">售价：145元</span>
-            </p>
-          </div>
-          <div class="delete">
+        <li class="prod-item" v-for="(item, index) in cartList">
+          <check-box :checked="item.checked" @change="toggleChecked(index)"></check-box>
+          <router-link :to="{name: 'detail', params: {id: item.detail.id}}">
+            <div class="img">
+              <img :src="item.detail.banners[0]" alt="">
+            </div>
+            <div class="info">
+              <p>{{item.detail.title}}</p>
+              <p class="type">型号：{{item.selectedType.name}}</p>
+              <p class="count">
+                <span class="number">数量：{{item.count}}</span>
+                <span class="price">总价：￥{{item.totalPrice.toFixed(2)}}</span>
+              </p>
+            </div>
+          </router-link>
+          <div class="delete" @click="remove(index)">
             <i class="iconfont icon-lajixiang"></i>
           </div>
         </li>
       </ul>
       <div class="footer">
-          <div class="footer-price">总价: <span class="price">$123.34</span></div>
+          <div class="footer-price">总价: <span class="price">￥{{total.toFixed(2)}}</span></div>
           <div class="footer-btn">立即结算</div>
       </div>
     </div>
-    <div v-if="false" class="m-defaultPage m-defaultPage-noCart">
+    <div  v-if="!cartList.length" class="m-defaultPage m-defaultPage-noCart">
       <div class="container">
         <div class="img"></div>
         <div class="txt">购物车空空的，去逛逛吧</div>
@@ -39,25 +41,39 @@
 
 <script>
   import * as types from '../../vuex/mutation-types'
+  import { MessageBox } from 'mint-ui'
 
   export default {
     data () {
       return {
-        serviceList: [
-          {
-            title: '30天无忧退货'
-          },
-          {
-            title: '48小时快速退款'
-          },
-          {
-            title: '满88元免邮费'
-          }
-        ]
       }
     },
-    async created () {
+    computed: {
+      total () {
+        return this.cartList.map(item => {
+          return item.checked ? item.totalPrice : 0
+        }).reduce((total, next) => {
+          return total + next
+        }, 0)
+      },
+      cartList () {
+        return this.$store.state.car.list
+      }
+    },
+    created () {
       this.$store.commit(types.CLICK_FOOT_ICON, 3)
+    },
+    methods: {
+      remove(index) {
+        MessageBox.confirm('确定从购物车中移除?').then(action => {
+          const { commit } = this.$store
+          commit('REMOVE_OUT_CAR', index)
+        })
+      },
+      toggleChecked(index) {
+        const { commit } = this.$store
+        commit('TOGGLE_CHECKED', index)
+      }
     }
   }
 </script>
@@ -89,15 +105,22 @@
   display: flex;
   align-items: center;
 }
+.prod-item a {
+  flex: 8;
+  display: flex;
+}
 .prod-item .img {
-  flex: 2;
+  flex: 3;
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 .prod-item .img img {
   width: 100%;
 }
 .prod-item .info {
-  flex: 6;
+  flex: 7;
   padding-left: 20px;
 }
 .prod-item .info p{
@@ -105,10 +128,14 @@
   line-height: 32px;
 }
 .prod-item .info .type {
+  color: #ed9334;
   padding: 20px 0;
 }
 .prod-item .info .price {
   padding-left: 20px;
+}
+.prod-item .info .count {
+  color: #ed9334;
 }
 .delete {
   flex: 1;
@@ -117,6 +144,7 @@
   text-align: center;
   justify-content: center;
   align-items: center;
+  color: red;
 }
 .m-cartHd {
   height: 88px;

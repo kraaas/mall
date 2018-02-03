@@ -2089,6 +2089,7 @@
     margin: 0;
     text-align: center;
     line-height: 72px;
+    font-size: 28px;
 }
 
 .mint-msgbox-btns {
@@ -2108,6 +2109,7 @@
     flex: 1;
     margin: 0;
     border: 0;
+    font-size: 28px;
 }
 
 .mint-msgbox-btn:focus {

@@ -16,6 +16,9 @@ const actions = {
 const mutations = {
     ['SET_PRODUCT_DETAIL'](state, detail) {
         state.detail = detail
+    },
+    ['CLEAR_DETAIL'](state, detail) {
+        state.detail = {}
     }
 }
 

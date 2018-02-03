@@ -11,6 +11,7 @@
     <div class="footer-item" :class="footItems[3].itemClass" @click="goFooterPath(3)">
       <i class="icon" :class="footItems[3].iconClass"></i>
       <span class="txt">购物车</span>
+      <mt-badge v-if="cartLength" class="cart-badge" size="small">{{cartLength}}</mt-badge>
     </div>
     <div class="footer-item" :class="footItems[4].itemClass" @click="goFooterPath(4)">
       <i class="icon" :class="footItems[4].iconClass"></i>
@@ -27,7 +28,10 @@
       ...mapState([
         'footItems',
         'footIdx'
-      ])
+      ]),
+      cartLength () {
+        return this.$store.state.car.list.length
+      }
     },
     methods: {
       goFooterPath (idx) {
@@ -118,5 +122,10 @@
     margin-top: 7px;
     font-size: 24px;
     line-height: 1;
+  }
+  .cart-badge {
+    position: absolute;
+    top: 0;
+    right: -30px;
   }
 </style>

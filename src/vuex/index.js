@@ -7,17 +7,30 @@ import mutations from './mutations'
 import user from './user'
 import home from './home'
 import productDetail from './productDetail'
+import car from './car'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   modules: {
     user,
     home,
-    productDetail
+    productDetail,
+    car
   },
   state,
   actions,
   getters,
-  mutations
+  mutations,
 })
+
+store.subscribe((mutation, state) => {
+  switch(mutation.type) {
+    case "ADD_TO_CAR":
+    case "REMOVE_OUT_CAR":
+      window.localStorage.setItem('cart_list', JSON.stringify(state.car.list))
+      break
+  }
+})
+
+export default store

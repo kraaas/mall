@@ -42,13 +42,15 @@
       </div>
       <div class="footer">
           <div class="footer-price">总价: <span class="price">￥{{totalPrice.toFixed(2)}}</span></div>
-          <div class="footer-btn">加入购物车</div>
+          <div class="footer-btn" @click="addToCar">加入购物车</div>
+          <div class="footer-btn footer-btn-buy" @click="buy">立即购买</div>
       </div>
     </header-back>
 </template>
 
 <script>
 import model from '../home/HomeModel'
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
@@ -72,12 +74,26 @@ export default {
     },
     selectedType () {
       return this.detail.typeList[this.currentTypeIndex]
+    },
+    orderInfo () {
+        const { selectedType, count, detail, totalPrice } = this
+        return {
+          selectedType,
+          count,
+          detail,
+          totalPrice,
+          checked: true
+        }
     }
   },
-  async created () {
+  created () {
     const { dispatch } = this.$store
     const { id } = this.$route.params
     dispatch('getDetail', { id })
+  },
+  destroyed () {
+    const { commit } = this.$store
+    commit('CLEAR_DETAIL')
   },
   methods: {
     changeType (index) {
@@ -85,6 +101,17 @@ export default {
     },
     changeCount () {
       this.count = Math.max(this.count, 1)
+    },
+    addToCar () {
+        const { commit } = this.$store
+        commit('ADD_TO_CAR', this.orderInfo)
+        Toast({
+            message: '添加购物车成功',
+            iconClass: 'icon icon-success'
+        })
+    },
+    buy () {
+
     }
   }
 }
@@ -200,7 +227,10 @@ export default {
     line-height: 99px;
     text-align: center;
     color: #fff;
-    background-color: #ec9334
+    background-color: #ec9334;
+}
+.footer-btn-buy {
+    background-color: #b4292d;
 }
 .back {
     position: fixed;
