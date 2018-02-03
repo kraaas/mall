@@ -3,20 +3,19 @@
  */
 import axios from 'axios'
 import router from '../router/index'
-import qs from 'qs'
 const Http = {}
 
 axios.defaults.withCredentials = true
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 Http.request = (url, method, params, headers) => {
   if (!headers) {
     headers = {}
   }
   method = method.toUpperCase()
-  var body = ''
+  var body = {}
   if (method === 'POST') {
-    body = qs.stringify(params)
+    body = params
     params = {}
   }
   return new Promise((resolve, reject) => {

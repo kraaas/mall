@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../vuex/index'
 
 const Default = r => require.ensure([], () => r(require('../views/layout/Default.vue')), 'Default')
 const Home = r => require.ensure([], () => r(require('../views/home/Home.vue')), 'Home')
@@ -48,17 +49,20 @@ const AppRouter = new Router({
     {
       path: '/account',
       name: 'Account',
-      component: Account
+      component: Account,
+      meta: { requireAuth: true }
     },
     {
       path: '/address',
       name: 'Address',
-      component: Address
+      component: Address,
+      meta: { requireAuth: true }
     },
     {
       path: '/add-address',
       name: 'AddAddress',
-      component: AddAddress
+      component: AddAddress,
+      meta: { requireAuth: true }
     },
     {
       path: '/concat',
@@ -68,12 +72,14 @@ const AppRouter = new Router({
     {
       path: '/orderList',
       name: 'OrderList',
-      component: OrderList
+      component: OrderList,
+      meta: { requireAuth: true }
     },
     {
       path: '/updatePwd',
       name: 'UpdatePwd',
-      component: UpdatePwd
+      component: UpdatePwd,
+      meta: { requireAuth: true }
     },
     {
       path: '/',
@@ -108,7 +114,19 @@ const AppRouter = new Router({
 // const whiteRouterList = ['/login']
 AppRouter.beforeEach((to, from, next) => {
   window.scrollTo(0, 0)
-  next()
+  if (to.meta.requireAuth) {  // 需要权限,进一步进行判断
+    if (store.state.isLogin) {  // 通过vuex state获取当前的token是否存在
+      next()
+    }
+    else {    //如果没有权限,重定向到登录页,进行登录
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
+    }
+  }else { //不需要权限 直接跳转
+    next()
+  }
 })
 
 AppRouter.afterEach(() => {

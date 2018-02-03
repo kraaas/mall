@@ -24,6 +24,10 @@ const mutations = {
     }
     state.headTitle = state.footItems[idx].title
     state.footIdx = idx
+  },
+  [types.SET_USER] (state, user) {
+    state.user = user
+    state.isLogin = !!user.name
   }
 }
 

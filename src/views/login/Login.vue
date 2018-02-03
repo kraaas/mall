@@ -4,21 +4,52 @@
         <form class="form">
             <div class="form-item">
                 <i class="iconfont icon-wodejuhuasuan"></i>
-                <input type="text">
+                <input type="text" v-model="tel" placeholder="请输入手机号码">
             </div>
             <div class="form-item">
                 <i class="iconfont icon-suo"></i>
-                <input type="password">
+                <input type="password" v-model="password" placeholder="请输入密码">
             </div>
-            <div class="login-btn">立即登录</div>
+            <div class="login-btn" @click="doLogin">立即登录</div>
         </form>
         <div class="regist">立即注册</div>
     </div>
 </template>
 <script>
+import { Toast } from 'mint-ui'
+import api from 'api'
+import * as types from '../../vuex/mutation-types'
 export default {
   data () {
-    return {}
+    return {
+      tel: '',
+      password: ''
+    }
+  },
+  methods: {
+    valid () {
+      if(!this.tel || !this.password) {
+          Toast('请填写正确信息')
+          return false
+      }
+      return true
+    },
+    doLogin () {
+      if(!this.valid()) return
+      api.doLogin({
+          tel: this.tel,
+          password: this.password
+      }).then(res => {
+          const { redirect } = this.$route.query
+          const { user } = res.data
+          this.$store.commit(types.SET_USER, user)
+          if(redirect) {
+            this.$router.replace(redirect)
+          }else {
+            this.$router.replace('/home')
+          }
+      })
+    }
   }
 }
 </script>

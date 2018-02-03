@@ -5,11 +5,16 @@
         <div class="g-row">
           <div class="left">
             <img class="avatar" v-lazy="userInfo.avatar">
-            <div class="info">
-              <p class="nickname">{{userInfo.nickname}}</p>
+            <div class="info" v-if="isLogin">
+              <p class="nickname">{{user.name}}</p>
               <div class="membershipLevel">
-                <span class="memberTitle0">13312093473</span>
+                <span class="memberTitle0">{{user.tel}}</span>
               </div>
+            </div>
+            <div class="info" v-if="!isLogin">
+              <router-link to="login">
+                <p class="nickname">请先登录</p>
+              </router-link>
             </div>
           </div>
         </div>
@@ -54,7 +59,7 @@
         </li>
       </ul>
     </div>
-    <div class="g-row">
+    <div class="g-row" v-if="isLogin">
       <div class="w-button" @click="logout">退出登录</div>
     </div>
     <div class="logoutModal" v-if="showModal">
@@ -90,6 +95,14 @@
         userInfo: {}
       }
     },
+    computed: {
+      user () {
+        return this.$store.state.user
+      },
+      isLogin () {
+        return this.$store.state.isLogin
+      }
+    },
     async created () {
       this.userInfo = model
       this.$store.commit(types.CLICK_FOOT_ICON, 4)
@@ -103,6 +116,8 @@
       },
       logoutConfirm () {
         this.showModal = false
+        this.$store.commit(types.SET_USER, {})
+        this.$router.replace('/login')
       }
     }
   }

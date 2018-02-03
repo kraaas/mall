@@ -1,4 +1,6 @@
 const state = {
+  user: {},
+  isLogin: false,
   footIdx: 0,
   headTitle: '首页',
   footItems: [

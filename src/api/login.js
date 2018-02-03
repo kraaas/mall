@@ -10,7 +10,7 @@ const Login = {}
  * @returns {string}
  */
 Login.captchaUrl = function () {
-  return config.apiurl + '/api/v1/captcha' + '?rand' + new Date().getTime()
+  return config.apiurl + '/captcha' + '?rand' + new Date().getTime()
 }
 
 /**
@@ -18,7 +18,7 @@ Login.captchaUrl = function () {
  * @param params
  */
 Login.checkCaptcha = function (params) {
-  let url = config.apiurl + '/api/v1/checkCaptcha'
+  let url = config.apiurl + '/checkCaptcha'
   return http.request(url, 'post', params)
 }
 
@@ -27,7 +27,7 @@ Login.checkCaptcha = function (params) {
  * @param params
  */
 Login.doLogin = function (params) {
-  let url = config.apiurl + '/api/v1/login'
+  let url = config.apiurl + '/login'
   return http.request(url, 'post', params)
 }
 
