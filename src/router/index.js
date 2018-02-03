@@ -12,6 +12,7 @@ const Login = r => require.ensure([], () => r(require('../views/login/login.vue'
 const Search = r => require.ensure([], () => r(require('../views/search/Search.vue')), 'Search')
 const Account = r => require.ensure([], () => r(require('../views/me/Account.vue')), 'Account')
 const Address = r => require.ensure([], () => r(require('../views/me/Address.vue')), 'Address')
+const AddAddress = r => require.ensure([], () => r(require('../views/me/AddAddress.vue')), 'AddAddress')
 const Concat = r => require.ensure([], () => r(require('../views/me/Concat.vue')), 'Concat')
 const OrderList = r => require.ensure([], () => r(require('../views/me/OrderList.vue')), 'OrderList')
 const UpdatePwd = r => require.ensure([], () => r(require('../views/me/UpdatePwd.vue')), 'UpdatePwd')
@@ -53,6 +54,11 @@ const AppRouter = new Router({
       path: '/address',
       name: 'Address',
       component: Address
+    },
+    {
+      path: '/add-address',
+      name: 'AddAddress',
+      component: AddAddress
     },
     {
       path: '/concat',

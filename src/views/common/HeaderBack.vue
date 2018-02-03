@@ -1,10 +1,7 @@
 <template>
   <div class="fixStatusBar">
     <mt-header class="fixStatusBar" fixed :title="title">
-        <mt-button slot="left" @click="back">
-            返回
-            <i slot="icon" class="iconfont icon-xiangzuojiantou"></i>
-        </mt-button>
+        <mt-button slot="left" @click="back" icon="back">返回</mt-button>
     </mt-header>
     <div class="content">
       <slot></slot>

@@ -9,8 +9,8 @@
         </div>
         <div class="btns">
           <div class="btns-left">
-            <mt-switch size="small" class="switch" v-model="value"></mt-switch>
-            <span>默认地址</span>
+            <span>创建时间：</span>
+            <span>2018-02-02</span>
           </div>
           <div class="btns-right">
             <mt-button size="small">
@@ -25,9 +25,6 @@
         </div>
       </li>
     </ul>
-    <div class="footer">
-      <mt-button plain type="primary" size="small">新增地址</mt-button>
-    </div>
   </header-back>
 </template>
 <script>
@@ -62,6 +59,8 @@ export default {
 }
 .btns-left {
   flex: 1;
+  line-height: 66px;
+  padding-left: 20px;
 }
 .btns-right {
   flex: 1;

@@ -5,54 +5,8 @@
     </div>
     <div class="has-data">
       <ul class="products">
-        <li class="prod-item">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox">
-            </label>
-          </div>
-          <div class="img">
-            <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
-          </div>
-          <div class="info">
-            <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
-            <p class="type"> 土豪金 - 64g</p>
-            <p class="count">
-              <span class="number">数量：2</span>
-              <span class="price">售价：145元</span>
-            </p>
-          </div>
-          <div class="delete">
-            <i class="iconfont icon-lajixiang"></i>
-          </div>
-        </li>
-        <li class="prod-item">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox">
-            </label>
-          </div>
-          <div class="img">
-            <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
-          </div>
-          <div class="info">
-            <p>荣耀9 全网通 标配版 4GB+64GB 移动联通电信4G手机</p>
-            <p class="type"> 土豪金 - 64g</p>
-            <p class="count">
-              <span class="number">数量：2</span>
-              <span class="price">售价：145元</span>
-            </p>
-          </div>
-          <div class="delete">
-            <i class="iconfont icon-lajixiang"></i>
-          </div>
-        </li>
-        <li class="prod-item">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox">
-            </label>
-          </div>
+        <li class="prod-item" v-for="i in 4">
+          <check-box></check-box>
           <div class="img">
             <img src="http://yanxuan.nosdn.127.net/9f7ebc9b8b619de55a67f68aa1ddcfe3.png" alt="">
           </div>

@@ -9,7 +9,7 @@
         </div>
         <div class="btns">
           <div class="btns-left">
-            <mt-switch size="small" class="switch" v-model="value"></mt-switch>
+            <mt-switch size="small" class="switch"></mt-switch>
             <span>默认地址</span>
           </div>
           <div class="btns-right">
@@ -26,7 +26,9 @@
       </li>
     </ul>
     <div class="footer">
-      <mt-button plain type="primary" size="small">新增地址</mt-button>
+      <router-link to="add-address">
+        <mt-button plain type="primary" size="small">新增地址</mt-button>
+      </router-link>
     </div>
   </header-back>
 </template>

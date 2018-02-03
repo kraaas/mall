@@ -12,6 +12,7 @@ import VueSwesomeSwiper from 'vue-awesome-swiper'
 import VueLazyload from 'vue-lazyload'
 import Mint from 'mint-ui'
 import HeaderBack from './views/common/HeaderBack.vue'
+import CheckBox from './views/common/CheckBox.vue'
 
 Vue.use(VueSwesomeSwiper)
 Vue.use(VueLazyload, {
@@ -22,19 +23,13 @@ Vue.use(VueLazyload, {
 })
 Vue.use(Mint)
 Vue.component(HeaderBack.name, HeaderBack)
-
-const cnzzProtocol = ((document.location.protocol === 'https:') ? "https://" : "http://")
-document.write(unescape("%3Cspan id='cnzz_stat_icon_1264769167'%3E%3C/span%3E%3Cscript src='" + cnzzProtocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264769167' type='text/javascript'%3E%3C/script%3E"))
-document.getElementById("cnzz_stat_icon_1264769167").style.display = "none"
-
+Vue.component(CheckBox.name, CheckBox)
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
         FastClick.attach(document.body)
     }, false)
 }
-
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
