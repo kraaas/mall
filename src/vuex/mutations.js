@@ -1,6 +1,3 @@
-/**
- * Created by Administrator on 2017/7/13.
- */
 import * as types from './mutation-types'
 
 const mutations = {
@@ -25,9 +22,8 @@ const mutations = {
     state.headTitle = state.footItems[idx].title
     state.footIdx = idx
   },
-  [types.SET_USER] (state, user) {
-    state.user = user
-    state.isLogin = !!user.name
+  ['TOGGLE_LOGIN'] (state) {
+    state.isLogin = !state.name
   }
 }
 

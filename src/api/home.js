@@ -6,10 +6,18 @@ import http from './http'
 const api = {}
 
 /**
- * 获取首页信息
+ * 获取今日推荐
  */
-api.getHomeInfo = function (params) {
-  const url = config.apiurl + '/api/index/index'
+api.getHotList = function (params) {
+  const url = config.apiurl + '/hotList'
+  return http.request(url, 'get', params)
+}
+
+/**
+ * 获取新品推荐
+ */
+api.getNewList = function (params) {
+  const url = config.apiurl + '/newList'
   return http.request(url, 'get', params)
 }
 

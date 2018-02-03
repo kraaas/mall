@@ -36,13 +36,12 @@ export default {
     },
     doLogin () {
       if(!this.valid()) return
-      api.doLogin({
+      this.$store.dispatch('doLogin', {
           tel: this.tel,
           password: this.password
       }).then(res => {
           const { redirect } = this.$route.query
           const { user } = res.data
-          this.$store.commit(types.SET_USER, user)
           if(redirect) {
             this.$router.replace(redirect)
           }else {

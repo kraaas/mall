@@ -6,9 +6,9 @@
           <div class="left">
             <img class="avatar" v-lazy="userInfo.avatar">
             <div class="info" v-if="isLogin">
-              <p class="nickname">{{user.name}}</p>
+              <p class="nickname">{{userInfo.name}}</p>
               <div class="membershipLevel">
-                <span class="memberTitle0">{{user.tel}}</span>
+                <span class="memberTitle0">{{userInfo.tel}}</span>
               </div>
             </div>
             <div class="info" v-if="!isLogin">
@@ -92,19 +92,17 @@
     data () {
       return {
         showModal: false,
-        userInfo: {}
       }
     },
     computed: {
-      user () {
-        return this.$store.state.user
+      userInfo () {
+        return this.$store.state.user.userInfo
       },
       isLogin () {
         return this.$store.state.isLogin
       }
     },
     async created () {
-      this.userInfo = model
       this.$store.commit(types.CLICK_FOOT_ICON, 4)
     },
     methods: {
@@ -115,8 +113,10 @@
         this.showModal = false
       },
       logoutConfirm () {
+        const { commit } = this.$store
         this.showModal = false
-        this.$store.commit(types.SET_USER, {})
+        commit('SET_USER', {})
+        commit('TOGGLE_LOGIN')
         this.$router.replace('/login')
       }
     }
