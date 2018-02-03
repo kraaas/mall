@@ -1,55 +1,50 @@
 <template>
-    <div class="detail">
+    <header-back :title="detail.title" class="detail" v-if="detail.title">
       <swiper class="banner-swiper" :options="bannerSwiperOption">
-        <swiper-slide class="banner-img" v-for="(banner, index) in banners" :key="index">
-          <img v-lazy="banner.picUrl" alt="">
+        <swiper-slide class="banner-img" v-for="(banner, index) in detail.banners" :key="index">
+          <img v-lazy="banner" alt="">
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
       <div class="info">
-          <h3 class="info-title">组件设计初衷就是要配合使用的</h3>
-          <h3 class="info-price">$893</h3>
+          <h3 class="info-title">{{detail.title}}</h3>
+          <h3 class="info-price">￥{{selectedType.price.toFixed(2)}}</h3>
       </div>
       <div class="choose">
           <div class="property">
-              <h3 class="property-title">尺寸</h3>
+              <h3 class="property-title">选择规格</h3>
               <ul>
-                  <li class="property-item active">4公斤</li>
-                  <li class="property-item">4公斤</li>
-                  <li class="property-item">4公斤</li>
-                  <li class="property-item">4公斤</li>
-              </ul>
-          </div>
-          <div class="property">
-              <h3 class="property-title">尺寸</h3>
-              <ul>
-                  <li class="property-item">4公斤</li>
-                  <li class="property-item active">4公斤</li>
-                  <li class="property-item">4公斤</li>
-                  <li class="property-item">4公斤</li>
+                  <li 
+                    :key="index"
+                    class="property-item"
+                    :class="{active: index === currentTypeIndex}"
+                    v-for="(type, index) in detail.typeList" 
+                    @click="changeType(index)"
+                  >
+                    {{type.name}}
+                  </li>
               </ul>
           </div>
           <div class="property">
               <h3 class="property-title">数量</h3>
               <div class="count">
-                <span class="count-btn reduce">-</span>
-                <input type="text" value="12">
-                <span class="count-btn add">+</span>
+                <span class="count-btn reduce" @click="count > 1 ? --count : count">-</span>
+                <input type="number" v-model="count" @change="changeCount">
+                <span class="count-btn add" @click="++count">+</span>
               </div>
           </div>
       </div>
       <div class="decs">
           <h3 class="decs-title">商品详情</h3>
-          <div class="banner-img" v-for="(banner, index) in banners" :key="index">
-            <img v-lazy="banner.picUrl" alt="">
+          <div class="banner-img" v-for="(img, index) in detail.images" :key="index">
+            <img v-lazy="img" alt="商品图片">
         </div>
       </div>
       <div class="footer">
-          <div class="footer-price">总价: <span class="price">$123.34</span></div>
+          <div class="footer-price">总价: <span class="price">￥{{totalPrice.toFixed(2)}}</span></div>
           <div class="footer-btn">加入购物车</div>
       </div>
-      <div class="back" @click="back">&lt;</div>
-</div>
+    </header-back>
 </template>
 
 <script>
@@ -57,6 +52,8 @@ import model from '../home/HomeModel'
 export default {
   data () {
     return {
+      count: 1,
+      currentTypeIndex: 0,
       bannerSwiperOption: {
         pagination: ".swiper-pagination",
         paginationClickable: true,
@@ -66,12 +63,28 @@ export default {
       }
     }
   },
+  computed: {
+    totalPrice () {
+      return this.count * this.selectedType.price
+    },
+    detail () {
+      return this.$store.state.productDetail.detail
+    },
+    selectedType () {
+      return this.detail.typeList[this.currentTypeIndex]
+    }
+  },
   async created () {
-    this.banners = model.focusList
+    const { dispatch } = this.$store
+    const { id } = this.$route.params
+    dispatch('getDetail', { id })
   },
   methods: {
-    back () {
-      this.$router.back()
+    changeType (index) {
+      this.currentTypeIndex = index
+    },
+    changeCount () {
+      this.count = Math.max(this.count, 1)
     }
   }
 }
@@ -122,6 +135,7 @@ export default {
     margin-right: 10px;
     font-size: 22px;
     color: #5a5959;
+    margin-bottom: 15px;
 }
 .property-item.active {
     border-color:#ec9334;

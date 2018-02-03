@@ -21,26 +21,26 @@
         <swiper class="newGoods-swiper" :options="swiperOption">
           <swiper-slide 
             class="newGoods-slide" 
-            v-for="(item, index) in newItemList" 
+            v-for="(item, index) in hotList" 
             :key="index"
           >
-            <router-link to="products" class="good">
-              <div class="good-img"><img v-lazy="item.listPicUrl"></div>
-              <div class="good-name">{{item.name}}</div>
+            <router-link :to="{name: 'detail', params: {id: item.id}}" class="good">
+              <div class="good-img"><img v-lazy="item.img"></div>
+              <div class="good-name">{{item.title}}</div>
               <div class="good-price">
-                <span>¥{{item.retailPrice}}</span>
-                <span class="good-price-earn">赚:¥{{item.retailPrice}}</span>
+                <span>¥{{item.orderPrice}}</span>
+                <!-- <span class="good-price-earn">赚:¥{{item.salePrice - item.orderPrice}}</span> -->
               </div>
             </router-link>
           </swiper-slide>
         </swiper>
       </div>
     </div>
-    <div class="cate" v-for="(cate, index) in cateList" :key="index">
+    <div class="cate">
       <div class="cate-grid">
-        <h3 class="title">{{cate.name}}好物</h3>
+        <h3 class="title">新品推荐</h3>
         <div class="cate-goods">
-          <product-list :list="cate.itemList" />
+          <product-list :list="newList" />
         </div>
       </div>
     </div>
@@ -65,9 +65,20 @@
         }
       }
     },
+    computed: {
+      hotList () {
+        return this.$store.state.home.hotList
+      },
+      newList () {
+        return this.$store.state.home.newList
+      }
+    },
     async created () {
       document.title = '移动端商城--首页'
-      this.$store.commit(types.CLICK_FOOT_ICON, 0)
+      const { commit, dispatch } = this.$store
+      dispatch('getHotList')
+      dispatch('getNewList')
+      commit(types.CLICK_FOOT_ICON, 0)
       this.newItemList = model.newItemList
       this.cateList = model.cateList
     },

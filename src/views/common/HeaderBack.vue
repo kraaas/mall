@@ -1,5 +1,5 @@
 <template>
-  <div class="fixStatusBar">
+  <div>
     <mt-header class="fixStatusBar" fixed :title="title">
         <mt-button slot="left" @click="back" icon="back">返回</mt-button>
     </mt-header>
@@ -25,6 +25,9 @@ export default {
 <style scoped>
 .content {
     margin-top: 88px;
+}
+.mint-header.is-fixed {
+  z-index: 100;
 }
 </style>
 

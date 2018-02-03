@@ -32,7 +32,7 @@ const AppRouter = new Router({
       component: Products
     },
     {
-      path: '/detail',
+      path: '/detail/:id',
       name: 'detail',
       component: Detail
     },

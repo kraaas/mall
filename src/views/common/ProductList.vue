@@ -1,14 +1,14 @@
 <template>
     <ul class="list">
-        <li class="item" v-for="(item, idx) in list" :key="idx">
+        <li class="item" v-for="(item, index) in list" :key="index">
             <router-link to="detail" class="good">
                 <div class="hd">
                     <div class="wraper">
-                    <img v-lazy="item.listPicUrl">
+                    <img v-lazy="item.img">
                     </div>
                 </div>
-                <div class="name">{{item.name}}</div>
-                <div class="price">¥{{item.retailPrice}}</div>
+                <div class="name">{{item.title}}</div>
+                <div class="price">¥{{item.orderPrice}}</div>
             </router-link>
         </li>
     </ul>
