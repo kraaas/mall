@@ -24,6 +24,9 @@ const mutations = {
     },
     ['TOGGLE_LOGIN'](state) {
         state.isLogin = !state.name
+    },
+    ['SET_LOADING'](state, loading) {
+        state.loading = loading
     }
 }
 

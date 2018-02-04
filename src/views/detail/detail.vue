@@ -43,7 +43,7 @@
       <div class="footer">
           <div class="footer-price">总价: <span class="price">￥{{totalPrice.toFixed(2)}}</span></div>
           <div class="footer-btn" @click="addToCar">加入购物车</div>
-          <div class="footer-btn footer-btn-buy" @click="buy">立即购买</div>
+          <div class="footer-btn footer-btn-buy" @click="buy">立即下单</div>
       </div>
     </header-back>
 </template>
@@ -107,11 +107,12 @@ export default {
         commit('ADD_TO_CAR', this.orderInfo)
         Toast({
             message: '添加购物车成功',
-            iconClass: 'icon icon-success'
+            iconClass: 'iconfont icon-checked'
         })
     },
     buy () {
-
+        const { dispatch } = this.$store
+        dispatch('buy')
     }
   }
 }

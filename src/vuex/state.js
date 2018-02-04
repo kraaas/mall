@@ -1,5 +1,5 @@
 const state = {
-  user: {},
+  loading: false,
   isLogin: false,
   footIdx: 0,
   headTitle: '首页',

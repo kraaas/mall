@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="g-row fixStatusBar">
-      <div class="m-profile">
+    <div class="g-row">
+      <div class="m-profile fixStatusBar">
         <div class="g-row">
           <div class="left">
             <img class="avatar" v-lazy="userInfo.avatar">

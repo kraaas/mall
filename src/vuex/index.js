@@ -28,6 +28,7 @@ store.subscribe((mutation, state) => {
   switch(mutation.type) {
     case "ADD_TO_CAR":
     case "REMOVE_OUT_CAR":
+    case "CLEAR_CART":
       window.localStorage.setItem('cart_list', JSON.stringify(state.car.list))
       break
   }

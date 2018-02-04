@@ -9,7 +9,6 @@
 
 <script>
   import FooterEle from '../common/Footer.vue'
-
   export default {
     components: {
       FooterEle

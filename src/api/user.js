@@ -26,7 +26,7 @@ api.updateUserInfo = function (params) {
  * 获取用户信息
  */
 api.getUserInfo = function () {
-  let url = config.apiurl + '/api/v2/getUserInfo'
+  let url = config.apiurl + '/getUserInfo'
   return http.request(url, 'get', {})
 }
 

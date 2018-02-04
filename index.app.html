@@ -11,7 +11,7 @@
     <meta name="x5-fullscreen" content="true">
     <meta name="360-fullscreen" content="true">
     <title>移动端商城</title>
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_556485_c7ersc8wf9z1if6r.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_556485_o2wmqatghojsv2t9.css">
     <script src="../script/api.js"></script>
     <script src="http://cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
@@ -22,7 +22,7 @@
         style.rel = 'stylesheet';
         var fixTop = api.safeArea.top
         var fixBottom = api.safeArea.bottom
-        style.appendChild(document.createTextNode('.fixStatusBar {padding-top:' + fixTop + 'px!important;}.fixTabBar{padding-bottom:' + fixBottom + 'px!important;}.fixTabBar .content{margin-top:' +(88 + fixBottom)  + 'px!important;}'));
+        style.appendChild(document.createTextNode('.fixStatusBar {padding-top:' + fixTop + 'px!important;}.fixTabBar{padding-bottom:' + fixBottom + 'px!important;box-sizing: content-box;}.fixTabBar .content{margin-top:' +(88 + fixBottom)  + 'px!important;}'));
         var head = document.getElementsByTagName('head')[0];
         head.appendChild(style);
       }

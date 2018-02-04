@@ -27,7 +27,7 @@
       </ul>
       <div class="footer">
           <div class="footer-price">总价: <span class="price">￥{{total.toFixed(2)}}</span></div>
-          <div class="footer-btn">立即结算</div>
+          <div class="footer-btn" @click="buy">立即下单</div>
       </div>
     </div>
     <div  v-if="!cartList.length" class="m-defaultPage m-defaultPage-noCart">
@@ -41,7 +41,7 @@
 
 <script>
   import * as types from '../../vuex/mutation-types'
-  import { MessageBox } from 'mint-ui'
+  import { MessageBox, Toast } from 'mint-ui'
 
   export default {
     data () {
@@ -73,6 +73,10 @@
       toggleChecked(index) {
         const { commit } = this.$store
         commit('TOGGLE_CHECKED', index)
+      },
+      buy () {
+        const { dispatch } = this.$store
+        dispatch('buy')
       }
     }
   }

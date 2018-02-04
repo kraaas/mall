@@ -1,10 +1,10 @@
 <template>
     <ul class="list">
         <li class="item" v-for="(item, index) in list" :key="index">
-            <router-link to="detail" class="good">
+            <router-link :to="{name: 'detail', params: {id: item.id}}" class="good">
                 <div class="hd">
                     <div class="wraper">
-                    <img v-lazy="item.img">
+                      <img v-lazy="item.img">
                     </div>
                 </div>
                 <div class="name">{{item.title}}</div>

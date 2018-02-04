@@ -18,6 +18,13 @@ const actions = {
             commit('TOGGLE_LOGIN')
             return res
         })
+    },
+    getUserInfo({ commit }) {
+        return api.getUserInfo().then(res => {
+            commit('SET_USER', res.data)
+            commit('TOGGLE_LOGIN')
+            return res
+        })
     }
 }
 

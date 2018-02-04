@@ -54,7 +54,7 @@ const AppRouter = new Router({
     },
     {
       path: '/address',
-      name: 'Address',
+      name: 'address',
       component: Address,
       meta: { requireAuth: true }
     },
