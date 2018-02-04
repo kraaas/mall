@@ -298,4 +298,5 @@ textarea {
 
 input[disabled="disabled"] {
   color: #bdbdbd;
+  background: #ffff;
 }

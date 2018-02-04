@@ -13,6 +13,7 @@ import VueLazyload from 'vue-lazyload'
 import Mint from 'mint-ui'
 import HeaderBack from './views/common/HeaderBack.vue'
 import CheckBox from './views/common/CheckBox.vue'
+import NoData from './views/common/NoData.vue'
 
 Vue.use(VueSwesomeSwiper)
 Vue.use(VueLazyload, {
@@ -24,6 +25,7 @@ Vue.use(VueLazyload, {
 Vue.use(Mint)
 Vue.component(HeaderBack.name, HeaderBack)
 Vue.component(CheckBox.name, CheckBox)
+Vue.component(NoData.name, NoData)
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
         FastClick.attach(document.body)

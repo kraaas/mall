@@ -18,15 +18,15 @@ api.getAllHeads = function () {
  * @param params
  */
 api.updateUserInfo = function (params) {
-  let url = config.apiurl + '/api/v2/updateUserInfo'
-  return http.request(url, 'post', params)
+  let url = config.apiurl + '/userInfo'
+  return http.request(url, 'put', params)
 }
 
 /**
  * 获取用户信息
  */
 api.getUserInfo = function () {
-  let url = config.apiurl + '/getUserInfo'
+  let url = config.apiurl + '/userInfo'
   return http.request(url, 'get', {})
 }
 

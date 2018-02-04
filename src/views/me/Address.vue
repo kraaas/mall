@@ -25,17 +25,18 @@
         </div>
       </li>
     </ul>
-    <div class="footer">
-      <router-link to="add-address">
-        <mt-button plain type="primary" size="small">新增地址</mt-button>
-      </router-link>
-    </div>
+    <mt-button slot="right" @click="add">新增</mt-button>
   </header-back>
 </template>
 <script>
 export default {
   data () {
     return {}
+  },
+  methods: {
+    add() {
+      this.$router.push({ name: 'addAddress' })
+    }
   }
 }
 </script>

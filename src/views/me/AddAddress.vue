@@ -9,7 +9,7 @@
             type="primary" 
             size="small"
             @click="add"
-        >新增地址</mt-button>
+        >保存</mt-button>
     </div>
   </header-back>
 </template>

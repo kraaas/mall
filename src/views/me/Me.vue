@@ -24,35 +24,35 @@
       <ul class="menu-list">
         <li class="menu-item">
           <router-link to="account">
-            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <i class="menu-icon iconfont icon-mydata"></i>
             <span class="txt">我的资料</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </router-link>
         </li>
         <li class="menu-item">
           <router-link to="orderList">
-            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <i class="menu-icon iconfont icon-dingdan"></i>
             <span class="txt">我的订单</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </router-link>
         </li>
         <li class="menu-item">
           <router-link to="address">
-            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <i class="menu-icon iconfont icon-shouhuodizhi"></i>
             <span class="txt">地址管理</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </router-link>
         </li>
         <li class="menu-item">
           <router-link to="updatePwd">
-            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <i class="menu-icon iconfont icon-anquan"></i>
             <span class="txt">修改密码</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </router-link>
         </li>
         <li class="menu-item">
           <router-link to="concat">
-            <i class="menu-icon iconfont icon-gouwuchetianjia"></i>
+            <i class="menu-icon iconfont icon-lianxiwomen"></i>
             <span class="txt">联系我们</span>
             <i class="menu-arrow iconfont icon-xiangyoujiantou"></i>
           </router-link>

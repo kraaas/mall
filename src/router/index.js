@@ -60,7 +60,7 @@ const AppRouter = new Router({
     },
     {
       path: '/add-address',
-      name: 'AddAddress',
+      name: 'addAddress',
       component: AddAddress,
       meta: { requireAuth: true }
     },
@@ -119,10 +119,11 @@ AppRouter.beforeEach((to, from, next) => {
       next()
     }
     else {    //如果没有权限,重定向到登录页,进行登录
-      next({
-        path: '/login',
-        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      })
+      // next({
+      //   path: '/login',
+      //   query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      // })
+      next()
     }
   }else { //不需要权限 直接跳转
     next()

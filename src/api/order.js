@@ -7,9 +7,14 @@ api.buy = function (params) {
   return http.request(url, 'post', params)
 }
 
-api.getOrdList = function (params) {
+api.getOrderList = function (params) {
   const url = config.apiurl + '/order'
   return http.request(url, 'get', params)
+}
+
+api.cancelOrder = function (params) {
+  const url = config.apiurl + '/order'
+  return http.request(url, 'put', params)
 }
 
 export default api

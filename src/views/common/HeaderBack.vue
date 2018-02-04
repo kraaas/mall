@@ -2,6 +2,7 @@
   <div>
     <mt-header class="fixStatusBar" fixed :title="title">
         <mt-button slot="left" @click="back" icon="back">返回</mt-button>
+        <slot name="right" slot="right"></slot>
     </mt-header>
     <div class="content">
       <slot></slot>
@@ -11,7 +12,7 @@
 <script>
 export default {
   name: 'header-back',
-  props: ['title'],
+  props: ['title', 'right'],
   data () {
     return {}
   },

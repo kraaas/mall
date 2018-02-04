@@ -1956,7 +1956,8 @@
 .mint-toast-icon {
     display: block;
     text-align: center;
-    font-size: 112px
+    font-size: 60px;
+    padding: 20px;
 }
 
 .mint-toast-text {

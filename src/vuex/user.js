@@ -25,6 +25,12 @@ const actions = {
             commit('TOGGLE_LOGIN')
             return res
         })
+    },
+    updateUserInfo({ commit, state }, params) {
+        return api.updateUserInfo(params).then(res => {
+            commit('SET_USER', { ...state.userInfo, name: params.name })
+            return res
+        })
     }
 }
 

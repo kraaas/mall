@@ -31,7 +31,7 @@ Http.request = (url, method, params, headers) => {
             if (code !== 0) {
                 Toast({
                     message: errMsg || '服务器异常',
-                    iconClass: 'iconfont icon-checked'
+                    iconClass: 'iconfont icon-error'
                 })
             }
             if (code === 403) {
@@ -46,9 +46,9 @@ Http.request = (url, method, params, headers) => {
         }, (err) => {
             Toast({
                 message: '服务器异常',
-                iconClass: 'iconfont icon-checked'
+                iconClass: 'iconfont icon-error'
             })
-            resolve({
+            reject({
                 code: 1000,
                 msg: '服务器异常'
             })
@@ -62,7 +62,7 @@ axios.interceptors.request.use((config) => {
 }, (error) => {
     Toast({
         message: '网络错误,请稍后再试',
-        iconClass: 'iconfont icon-checked'
+        iconClass: 'iconfont icon-error'
     })
     store.commit('SET_LOADING', false)
     return Promise.reject(error)
