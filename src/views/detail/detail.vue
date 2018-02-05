@@ -45,6 +45,10 @@
           <div class="footer-btn" @click="addToCar">加入购物车</div>
           <div class="footer-btn footer-btn-buy" @click="buy">立即下单</div>
       </div>
+      <select-address 
+        :show="showAddress" 
+        :onselect="selectAddress"
+      ></select-address>
     </header-back>
 </template>
 
@@ -54,6 +58,8 @@ import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
+      addressId: null,
+      showAddress: false,
       count: 1,
       currentTypeIndex: 0,
       bannerSwiperOption: {
@@ -76,13 +82,14 @@ export default {
       return this.detail.typeList[this.currentTypeIndex]
     },
     orderInfo () {
-        const { selectedType, count, detail, totalPrice } = this
+        const { selectedType, count, detail, totalPrice, addressId } = this
         return {
           selectedType,
           count,
           detail,
           totalPrice,
-          checked: true
+          checked: true,
+          addressId
         }
     }
   },
@@ -111,8 +118,13 @@ export default {
         })
     },
     buy () {
+        this.showAddress = true
+    },
+    selectAddress(id) {
+        this.showAddress = false
+        this.addressId = id
         const { dispatch } = this.$store
-        dispatch('buy')
+        dispatch('buy', {params: [this.orderInfo], clearCart: false})
     }
   }
 }

@@ -2,22 +2,26 @@
   <header-back :title="`我的订单(${orderList.length})`">
     <ul class="add-wrap" v-if="orderList.length">
       <li class="prod-item-wrap" v-for="(order, index) in orderList" :key="index">
-        <router-link class="prod-item" :to="{name: 'detail', params: {id: order.detail.id}}">
+        <router-link 
+          class="prod-item" 
+          :to="{name: 'detail', params: {id: item.detail.id}}"
+          v-for="(item, innerIndex) in order.list"
+          :key="innerIndex"
+        >
             <div class="img">
-              <img :src="order.detail.banners[0]" alt="">
+              <img :src="item.detail.banners[0]" alt="">
             </div>
             <div class="info">
-              <p>{{order.detail.title}}</p>
-              <p class="type">型号：{{order.selectedType.name}}</p>
+              <p>{{item.detail.title}}</p>
+              <p class="type">型号：{{item.selectedType.name}}</p>
               <p class="count">
-                <span class="number">数量：{{order.count}}</span>
-                <span class="price">总价：￥{{order.totalPrice.toFixed(2)}}</span>
+                <span class="number">数量：{{item.count}}</span>
+                <span class="price">总价：￥{{item.totalPrice.toFixed(2)}}</span>
               </p>
             </div>
         </router-link>
         <div class="btns">
           <div class="btns-left">
-            <span>下单时间：</span>
             <span>{{order.orderDate}}</span>
           </div>
           <div class="btns-right">
@@ -85,8 +89,16 @@ export default {
 }
 </script>
 <style scoped>
+.add-wrap {
+  padding-top: 1px;
+}
 .prod-item-wrap {
-  margin-bottom: 30px;
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 95%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 16px #e4e1e1;
 }
 .prod-item {
   display: -ms-flex;

@@ -31,6 +31,9 @@ const actions = {
             commit('SET_USER', { ...state.userInfo, name: params.name })
             return res
         })
+    },
+    updatePassword({ commit }, params) {
+        return api.updatePassword(params)
     }
 }
 

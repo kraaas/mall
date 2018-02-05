@@ -12,7 +12,7 @@ Http.request = (url, method, params, headers) => {
     }
     method = method.toUpperCase()
     var body = {}
-    if (method === 'POST') {
+    if (method === 'POST' || method === 'PUT') {
         body = params
         params = {}
     }

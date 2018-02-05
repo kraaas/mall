@@ -4,6 +4,7 @@ import User from './user'
 import Weixin from './weixin'
 import Detail from './detail'
 import Order from './order'
+import Address from './address'
 
 var api = {}
 
@@ -13,5 +14,6 @@ api = Object.assign(api, User)
 api = Object.assign(api, Weixin)
 api = Object.assign(api, Detail)
 api = Object.assign(api, Order)
+api = Object.assign(api, Address)
 
 export default api

@@ -36,6 +36,10 @@
         <div class="txt">购物车空空的，去逛逛吧</div>
       </div>
     </div>
+    <select-address 
+      :show="showAddress" 
+      :onselect="selectAddress"
+    ></select-address>
   </div>
 </template>
 
@@ -46,6 +50,8 @@
   export default {
     data () {
       return {
+        addressId: null,
+        showAddress: false,
       }
     },
     computed: {
@@ -74,9 +80,22 @@
         const { commit } = this.$store
         commit('TOGGLE_CHECKED', index)
       },
-      buy () {
+      buy() {
+        this.showAddress = true
+      },
+      selectAddress (id) {
+        this.showAddress = false
+        this.addressId = id
         const { dispatch } = this.$store
-        dispatch('buy')
+        const orderList = this.cartList.filter(item => item.checked)
+        if(orderList.length) {
+          dispatch('buy', {params: {addressId: id, orderList}})
+        } else {
+          Toast({
+              message: '请选择商品',
+              iconClass: 'iconfont icon-error'
+          })
+        }
       }
     }
   }

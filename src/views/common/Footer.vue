@@ -62,7 +62,7 @@
     -moz-justify-content: space-around;
     justify-content: space-around;
     position: fixed;
-    z-index: 9999;
+    z-index: 999;
     left: 0;
     bottom: 0;
     width: 100%;

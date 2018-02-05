@@ -1,23 +1,28 @@
 <template>
   <header-back title="地址管理">
-    <ul class="add-wrap">
-      <li class="add-item" v-for="i in 3">
+    <mt-button slot="right" @click="add">新增</mt-button>
+    <ul class="add-wrap" v-if="addressList.length" >
+      <li class="add-item" v-for="(address, index) in addressList" :key="index">
         <div class="add-info">
-          <span class="name">廖静思</span>
-          <span class="tel">15018054003</span>
-          <p class="detail">单身福利手动加法律手段</p>
+          <span class="name">{{address.name}}</span>
+          <span class="tel">{{address.tel}}</span>
+          <p class="detail">{{address.detail}}</p>
         </div>
         <div class="btns">
-          <div class="btns-left">
-            <mt-switch size="small" class="switch"></mt-switch>
+          <!-- <div class="btns-left" v-if="addressList.length > 1" >
+            <mt-switch 
+              v-model="address.isDefault" 
+              size="small" 
+              class="switch"
+            ></mt-switch>
             <span>默认地址</span>
-          </div>
+          </div> -->
           <div class="btns-right">
-            <mt-button size="small">
+            <mt-button size="small" @click="add(address)">
                 编辑
                 <i slot="icon" class="iconfont icon-yijianfankui"></i>
             </mt-button>
-            <mt-button size="small">
+            <mt-button size="small" @click="remove(address.id, index)">
                 删除
                 <i slot="icon" class="iconfont icon-lajixiang"></i>
             </mt-button>
@@ -25,26 +30,48 @@
         </div>
       </li>
     </ul>
-    <mt-button slot="right" @click="add">新增</mt-button>
+    <no-data v-if="!addressList.length" tip="暂无地址"></no-data>
   </header-back>
 </template>
 <script>
+import { MessageBox, Toast } from 'mint-ui'
 export default {
   data () {
     return {}
   },
+  computed: {
+    addressList() {
+      return this.$store.state.address.list
+    }
+  },
+  created() {
+    const { dispatch } = this.$store
+    dispatch('getAddressList')
+  },
   methods: {
-    add() {
-      this.$router.push({ name: 'addAddress' })
+    add(address = {}) {
+      this.$router.push({ name: 'addAddress', params: { ...address } })
+    },
+    remove(id, index) {
+      MessageBox.confirm('确定删除改地址?').then(action => {
+        const { dispatch } = this.$store
+        dispatch('removeAddress', { id, index })
+      })
     }
   }
 }
 </script>
 <style scoped>
+.add-wrap {
+  padding-top: 1px;
+}
 .add-item {
-  border-bottom: 1px solid #e0e0e0;
-  background-color: #fff;
-  margin-bottom: 20px;
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 95%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 16px #e4e1e1;
 }
 .add-info {
   padding: 40px;
