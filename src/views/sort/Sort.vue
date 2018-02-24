@@ -10,7 +10,7 @@
             :class="{active: item.isActive}" 
             :key="index"
           >
-            <a class="txt" href="javscript:;" @click="changeItem(item.id)">{{item.name}}</a>
+            <a class="txt" href="javscript:;" @click="refreshSubCategory(item)">{{item.label}}</a>
           </swiper-slide>
         </swiper>
       </div>
@@ -23,12 +23,12 @@
           </span>
         </div>
         <ul class="list">
-          <li class="cateItem" v-for="(item, index) in subInfo.categoryL2List" :key="index">
+          <li class="cateItem" v-for="(item, index) in subItemList" :key="index">
             <a href="javascript:;">
               <div class="cateImgWrapper">
-                <img :src="item.wapBannerUrl" alt="" class="cateImg">
+                <img :src="item.img" alt="" class="cateImg">
               </div>
-              <div class="name">{{item.name}}</div>
+              <div class="name">{{item.label}}</div>
             </a>
           </li>
         </ul>
@@ -49,14 +49,24 @@
           direction: 'vertical',
           height: 50
         },
-        itemList: model.categoryList,
-        subInfo: null,
+        currentItem: null,
+        subItemList: null,
         subName: ''
       }
     },
+    computed: {
+      itemList () {
+        const list = this.$store.state.classify.list
+        return list
+      }
+    },
     async created () {
-      this.$store.commit(types.CLICK_FOOT_ICON, 2)
-      this.refreshSubCategory()
+      const { commit, dispatch } = this.$store
+      const firstItem = this.itemList[0]
+      firstItem.isActive = true
+      this.currentItem = firstItem
+      this.refreshSubCategory(firstItem)
+      commit(types.CLICK_FOOT_ICON, 2)
     },
     mounted () {
       const htmlEle = document.getElementsByTagName('html')[0]
@@ -71,27 +81,12 @@
       }
     },
     methods: {
-      refreshSubCategory () {
-        let categoryList = this.itemList
-        for (let k in categoryList) {
-          let category = categoryList[k]
-          if (category.isActive) {
-            this.subInfo = model.subCategoryList[category.id]
-            this.subName = category.name + '分类'
-          }
-        }
-      },
-      changeItem (id) {
-        let categoryList = this.itemList
-        for (let k in categoryList) {
-          let category = categoryList[k]
-          if (category.id === id) {
-            this.itemList[k].isActive = true
-          } else {
-            this.itemList[k].isActive = false
-          }
-        }
-        this.refreshSubCategory()
+      refreshSubCategory (item) {
+        this.currentItem.isActive = false
+        item.isActive = true
+        this.currentItem = item
+        this.subItemList = item.children
+        this.subName = item.label + '分类'
       }
     },
     components: {

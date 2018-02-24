@@ -5,12 +5,22 @@
       <div class="cateMenu-item" v-for="(cate, index) in cateList" :key="index">
         <a href="javascript:;">
           <div>
-            <img v-lazy="cate.iconUrl">
+            <img v-lazy="cate.img">
           </div>
           <div>
-            <span>{{cate.name}}</span>
+            <span>{{cate.label}}</span>
           </div>
         </a>
+      </div>
+      <div class="cateMenu-item">
+        <router-link to="sort">
+          <div>
+            <img v-lazy="">
+          </div>
+          <div>
+            <span>更多</span>
+          </div>
+        </router-link>
       </div>
     </div>
     <div class="newGoods">
@@ -56,8 +66,6 @@
   export default {
     data () {
       return {
-        cateList: [],
-        newItemList: [],
         swiperOption: {
           slidesPerView: 2.5,
           spaceBetween: 10,
@@ -71,16 +79,20 @@
       },
       newList () {
         return this.$store.state.home.newList
+      },
+      cateList () {
+        let list = this.$store.state.classify.list
+        list = list.slice(0, 9)
+        return list
       }
     },
     async created () {
       document.title = '移动端商城--首页'
       const { commit, dispatch } = this.$store
+      dispatch('getClassifyList')
       dispatch('getHotList')
       dispatch('getNewList')
       commit(types.CLICK_FOOT_ICON, 0)
-      this.newItemList = model.newItemList
-      this.cateList = model.cateList
     },
     methods: {
     },
