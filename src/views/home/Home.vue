@@ -3,14 +3,14 @@
     <search-header />
     <div class="cateMenu">
       <div class="cateMenu-item" v-for="(cate, index) in cateList" :key="index">
-        <a href="javascript:;">
+        <router-link to="products">
           <div>
             <img v-lazy="cate.img">
           </div>
           <div>
             <span>{{cate.label}}</span>
           </div>
-        </a>
+        </router-link>
       </div>
       <div class="cateMenu-item">
         <router-link to="sort">

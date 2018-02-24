@@ -11,6 +11,7 @@ import car from './car'
 import order from './order'
 import address from './address'
 import classify from './classify'
+import product from './product'
 
 Vue.use(Vuex)
 
@@ -22,7 +23,8 @@ const store = new Vuex.Store({
         car,
         order,
         address,
-        classify
+        classify,
+        product
     },
     state,
     actions,

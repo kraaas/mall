@@ -1,7 +1,7 @@
 <template>
   <div>
     <search-header :showBack="true" />
-    <product-list :list="cateList" />
+    <product-list :list="list" />
   </div>
 </template>
 
@@ -9,14 +9,19 @@
 import model from '../home/HomeModel'
 import ProductList from '../common/ProductList.vue'
 import SearchHeader from '../common/SearchHeader.vue'
+
 export default {
   data () {
-    return {
-      cateList: []
+    return {}
+  },
+  computed: {
+    list() {
+      return this.$store.state.product.list
     }
   },
-  async created () {
-    this.cateList = model.cateList[0].itemList
+  created() {
+    const { dispatch } = this.$store
+    dispatch('getProductList')
   },
   components: {
     ProductList,

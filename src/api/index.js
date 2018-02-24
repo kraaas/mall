@@ -6,6 +6,7 @@ import Detail from './detail'
 import Order from './order'
 import Address from './address'
 import Classify from './classify'
+import Product from './product'
 
 var api = {}
 
@@ -17,5 +18,6 @@ api = Object.assign(api, Detail)
 api = Object.assign(api, Order)
 api = Object.assign(api, Address)
 api = Object.assign(api, Classify)
+api = Object.assign(api, Product)
 
 export default api

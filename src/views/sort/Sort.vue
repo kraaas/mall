@@ -24,12 +24,12 @@
         </div>
         <ul class="list">
           <li class="cateItem" v-for="(item, index) in subItemList" :key="index">
-            <a href="javascript:;">
+            <router-link to="products">
               <div class="cateImgWrapper">
                 <img :src="item.img" alt="" class="cateImg">
               </div>
               <div class="name">{{item.label}}</div>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
