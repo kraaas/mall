@@ -4,14 +4,10 @@
 const Config = {}
 
 let env = process.env.NODE_ENV
-Config.apiurl = 'https://easy-mock.com/mock/5a700454e1c78c20ab62a8c8/api'
+// Config.apiurl = 'https://easy-mock.com/mock/5a700454e1c78c20ab62a8c8/api'
+Config.apiurl = '/app'
 if (env === 'production') {
-  let apiurl = window.location.protocol + '//'
-  apiurl += window.location.hostname
-  if (window.location.port !== '80' || window.location.port !== '443' || window.location.port !== '') {
-    apiurl += ':' + window.location.port
-  }
-  Config.apiurl = apiurl
+  Config.apiurl = 'http://api.gdsc198.com:8001/app'
 }
 
 export default Config

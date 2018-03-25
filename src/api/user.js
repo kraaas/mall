@@ -7,7 +7,7 @@ const api = {}
 
 api.updateUserInfo = function (params) {
   let url = config.apiurl + '/userInfo'
-  return http.request(url, 'put', params)
+  return http.request(url, 'post', params)
 }
 
 api.getUserInfo = function () {
@@ -16,7 +16,7 @@ api.getUserInfo = function () {
 }
 
 api.updatePassword = function (params) {
-  let url = config.apiurl + '/password'
-  return http.request(url, 'put', params)
+  let url = config.apiurl + '/updatePassword'
+  return http.request(url, 'post', params)
 }
 export default api

@@ -12,11 +12,16 @@ export default {
   computed: {
     loading () {
       return this.$store.state.loading
+    },
+    isLogin() {
+      return this.$store.state.isLogin
     }
   },
   created() {
     const { dispatch } = this.$store
+    // if(this.isLogin) {
     dispatch('getUserInfo')
+    // }
   },
   watch: {
     loading (val, oldVal) {

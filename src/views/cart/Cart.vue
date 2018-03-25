@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="">
     <div class="m-cartHd fixStatusBar">
       <span class="logo">购物车</span>
     </div>
     <div v-if="cartList.length" class="has-data">
-      <ul class="products">
+      <ul class="products marginTop">
         <li class="prod-item" v-for="(item, index) in cartList">
           <check-box :checked="item.checked" @change="toggleChecked(index)"></check-box>
           <router-link :to="{name: 'detail', params: {id: item.detail.id}}">
             <div class="img">
-              <img :src="item.detail.banners[0]" alt="">
+              <img :src="`http://api.gdsc198.com:8001/img/${item.detail.image_path[0]}`" alt="">
             </div>
             <div class="info">
               <p>{{item.detail.title}}</p>
@@ -30,7 +30,7 @@
           <div class="footer-btn" @click="buy">立即下单</div>
       </div>
     </div>
-    <div  v-if="!cartList.length" class="m-defaultPage m-defaultPage-noCart">
+    <div v-else class="m-defaultPage m-defaultPage-noCart marginTop">
       <div class="container">
         <div class="img"></div>
         <div class="txt">购物车空空的，去逛逛吧</div>
@@ -87,9 +87,21 @@
         this.showAddress = false
         this.addressId = id
         const { dispatch } = this.$store
-        const orderList = this.cartList.filter(item => item.checked)
-        if(orderList.length) {
-          dispatch('buy', {params: {addressId: id, orderList}})
+        const items = this.cartList.filter(item => item.checked).map(order => {
+          return {
+              detail: order.detail._id,
+              typeId: order.selectedType._id,
+              count: order.count
+            }
+        })
+        const order = {
+            addressId: this.addressId,
+            items,
+            totalPrice: this.total
+          } 
+        
+        if(items.length) {
+          dispatch('buy', {order})
         } else {
           Toast({
               message: '请选择商品',
@@ -102,6 +114,9 @@
 </script>
 
 <style scoped>
+.products {
+  padding-top: 88px;
+}
 .prod-item {
   display: -ms-flex;
   display: -webkit-box;
@@ -170,12 +185,15 @@
   color: red;
 }
 .m-cartHd {
+  position: fixed;
+  top:0;
+  width: 100%;
+  left: 0;
   height: 88px;
   padding: 0 30px;
   line-height: 88px;
   text-align: center;
   background-color: #fff;
-  position: relative;
 }
 .m-cartHd .logo {
   display: inline-block;
@@ -199,16 +217,11 @@
   bottom: 0;
 }
 .m-defaultPage {
-  top: 88px;
+  padding-top: 88px;
   z-index: 0;
   width: 100%;
   background-color: #f4f4f4;
   text-align: center;
-}
-.fixed, .m-defaultPage {
-  position: fixed;
-  left: 0;
-  bottom: 0;
 }
 .m-defaultPage .container {
   position: absolute;
@@ -271,6 +284,6 @@
     line-height: 99px;
     text-align: center;
     color: #fff;
-    background-color: #ec9334
+    background-color: #ce352d
 }
 </style>

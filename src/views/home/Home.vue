@@ -1,56 +1,72 @@
 <template>
   <div>
-    <search-header />
-    <div class="cateMenu">
-      <div class="cateMenu-item" v-for="(cate, index) in cateList" :key="index">
-        <router-link to="products">
-          <div>
-            <img v-lazy="cate.img">
-          </div>
-          <div>
-            <span>{{cate.label}}</span>
-          </div>
-        </router-link>
-      </div>
-      <div class="cateMenu-item">
-        <router-link to="sort">
-          <div>
-            <img v-lazy="">
-          </div>
-          <div>
-            <span>更多</span>
-          </div>
-        </router-link>
-      </div>
+    <div class="home-header">
+      <search-header />
     </div>
-    <div class="newGoods">
-      <div class="newGoods-title">
-        <span>今日特价</span>
-      </div>
-      <div class="newGoods-item">
-        <swiper class="newGoods-swiper" :options="swiperOption">
-          <swiper-slide 
-            class="newGoods-slide" 
-            v-for="(item, index) in hotList" 
-            :key="index"
+    <div class="home-content marginTop">
+      <div class="cateMenu">
+        <div v-if="cateList.length" class="cateMenu-item" v-for="(item, index) in cateList" :key="item._id">
+          <router-link 
+            :to="{
+              path: 'products', 
+              query: {label: item.label, id: item._id}
+            }"
           >
-            <router-link :to="{name: 'detail', params: {id: item.id}}" class="good">
-              <div class="good-img"><img v-lazy="item.img"></div>
-              <div class="good-name">{{item.title}}</div>
-              <div class="good-price">
-                <span>¥{{item.orderPrice}}</span>
-                <!-- <span class="good-price-earn">赚:¥{{item.salePrice - item.orderPrice}}</span> -->
-              </div>
-            </router-link>
-          </swiper-slide>
-        </swiper>
+            <div>
+              <svg class="icon" aria-hidden="true">
+                  <use :xlink:href="`#${item.icon}`"></use>
+              </svg>
+            </div>
+            <div>
+              <span>{{item.label}}</span>
+            </div>
+          </router-link>
+        </div>
+        <div v-if="cateList.length" class="cateMenu-item">
+          <router-link to="sort">
+            <div>
+              <svg class="icon" aria-hidden="true">
+                  <use :xlink:href="`#icon-menu`"></use>
+              </svg>
+            </div>
+            <div>
+              <span>更多</span>
+            </div>
+          </router-link>
+        </div>
+        <empty v-else></empty>
       </div>
-    </div>
-    <div class="cate">
-      <div class="cate-grid">
-        <h3 class="title">新品推荐</h3>
-        <div class="cate-goods">
-          <product-list :list="newList" />
+      <div class="newGoods">
+        <div class="newGoods-title">
+          <span>今日特价</span>
+        </div>
+        <div class="newGoods-item">
+          <swiper v-if="hotList.length" class="newGoods-swiper" :options="swiperOption">
+            <swiper-slide 
+              class="newGoods-slide" 
+              v-for="(item, index) in hotList" 
+              :key="index"
+            >
+              <router-link :to="{name: 'detail', params: {id: item._id}}" class="good">
+                <div class="good-img"><img v-lazy="`http://api.gdsc198.com:8001/img/${item.image_path[0]}`"></div>
+                <div class="good-name">{{item.title}}</div>
+                <div class="good-price">
+                  <span>¥{{item.specs[0].price}}</span>
+                  <!-- <span class="good-price-earn">赚:¥{{item.salePrice - item.orderPrice}}</span> -->
+                </div>
+              </router-link>
+            </swiper-slide>
+          </swiper>
+          <empty v-else></empty>
+        </div>
+      </div>
+      <div class="cate">
+        <div class="cate-grid">
+          <h3 class="title">新品推荐</h3>
+          <div class="cate-goods">
+            <product-list v-if="newList.length" :list="newList" />
+            <empty v-else></empty>
+          </div>
         </div>
       </div>
     </div>
@@ -104,6 +120,15 @@
 </script>
 
 <style scoped>
+  .home-header {
+    position: fixed;
+    width: 100%;
+    top:0;
+    z-index: 1000;
+  }
+  .home-content {
+    padding-top: 90px;
+  }
   .banner {
     width: 100%;
     overflow: hidden;
@@ -135,6 +160,8 @@
     color: #333;
     font-size: 24px;
     line-height: 28px;
+    margin-top: 10px;
+    display: inline-block;
   }
   .newGoods {
     margin-bottom: 20px;

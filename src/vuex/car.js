@@ -8,15 +8,8 @@ const state = {
 }
 
 const actions = {
-    buy({ commit }, { params, clearCart = true }) {
-        const { hasAddress } = store.state.user.userInfo
-        if (!hasAddress) {
-            MessageBox.confirm('您还没后添加收货地址，请先添加').then(action => {
-                router.push({ name: 'address' })
-            })
-            return
-        }
-        return api.buy(params).then(res => {
+    buy({ commit }, { order, clearCart = true }) {
+        return api.buy(order).then(res => {
             if (clearCart) commit('CLEAR_CART')
             Toast({
                 message: '下单成功',

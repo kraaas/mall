@@ -1,13 +1,13 @@
 <template>
   <div>
     <search-header />
-    <div class="m-cateNavVertWrap" style="left:0;">
+    <div class="m-cateNavVertWrap marginTop" style="left:0;">
       <div class="sort-swiper">
         <swiper :options="swiperOption" class="swiper-wrapper-cls">
           <swiper-slide 
             class="item" 
             v-for="(item, index) in itemList" 
-            :class="{active: item.isActive}" 
+            :class="{active: currentItem._id === item._id}" 
             :key="index"
           >
             <a class="txt" href="javscript:;" @click="refreshSubCategory(item)">{{item.label}}</a>
@@ -16,22 +16,30 @@
       </div>
     </div>
     <div class="m-subCateList">
-      <div class="cateList">
+      <div class="cateList" v-for="(sub, index) in subItemList" :key="index" >
         <div class="hd">
           <span class="text">
-            <span>{{subName}}</span>
+            <span>{{sub.label}}</span>
           </span>
         </div>
-        <ul class="list">
-          <li class="cateItem" v-for="(item, index) in subItemList" :key="index">
-            <router-link to="products">
+        <ul class="list" v-if="sub.children.length">
+          <li class="cateItem" v-for="(item, index) in sub.children" :key="index">
+            <router-link 
+              :to="{
+                path: 'products', 
+                query: {label: item.label, id: item._id}
+              }"
+            >
               <div class="cateImgWrapper">
-                <img :src="item.img" alt="" class="cateImg">
+                <svg class="icon big" aria-hidden="true">
+                    <use :xlink:href="`#${item.icon}`"></use>
+                </svg>
               </div>
               <div class="name">{{item.label}}</div>
             </router-link>
           </li>
         </ul>
+        <empty v-else></empty>
       </div>
     </div>
   </div>
@@ -50,7 +58,7 @@
           height: 50
         },
         currentItem: null,
-        subItemList: null,
+        subItemList: [],
         subName: ''
       }
     },
@@ -62,10 +70,14 @@
     },
     async created () {
       const { commit, dispatch } = this.$store
+      if(!this.itemList.length) {
+        await dispatch('getClassifyList')
+      }
       const firstItem = this.itemList[0]
-      firstItem.isActive = true
-      this.currentItem = firstItem
-      this.refreshSubCategory(firstItem)
+      if(firstItem) {
+        this.currentItem = firstItem
+        this.refreshSubCategory(firstItem)
+      }
       commit(types.CLICK_FOOT_ICON, 2)
     },
     mounted () {
@@ -200,6 +212,7 @@
   .m-subCateList .cateItem .cateImgWrapper {
     width: 144px;
     height: 144px;
+    text-align: center;
   }
   .m-subCateList .cateItem .cateImg {
     display: block;

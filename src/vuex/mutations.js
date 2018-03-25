@@ -23,7 +23,7 @@ const mutations = {
         state.footIdx = idx
     },
     ['TOGGLE_LOGIN'](state) {
-        state.isLogin = !state.name
+        // state.isLogin = !state.name
     },
     ['SET_LOADING'](state, loading) {
         state.loading = loading

@@ -3,7 +3,9 @@ import router from '../router/index'
 import store from '../vuex/index'
 import { Toast } from 'mint-ui'
 const Http = {}
-
+const group = '5a9d2e61e0fd21228ecd045a'
+// const group = '5a91013698ffab18046498ec'
+const order_group = '5aa5489d539668445afebc09'
 axios.defaults.withCredentials = true
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 Http.request = (url, method, params, headers) => {
@@ -16,16 +18,13 @@ Http.request = (url, method, params, headers) => {
         body = params
         params = {}
     }
+    url += '?t=' + Date.now()
     return new Promise((resolve, reject) => {
         axios({
             url: url,
             method: method,
             params: params,
-            data: body,
-            headers: {
-                'X-xtw-token': headers['token'] || '',
-                'X-xtw-id': headers['id'] || ''
-            }
+            data: body
         }).then((res) => {
             const { data, code, errMsg } = res.data
             if (code !== 0) {
@@ -58,6 +57,9 @@ Http.request = (url, method, params, headers) => {
 // 请求拦截
 axios.interceptors.request.use((config) => {
     store.commit('SET_LOADING', true)
+    if (!config.params) config.params = {}
+    config.params.group = group
+    config.params.order_group = order_group
     return config;
 }, (error) => {
     Toast({

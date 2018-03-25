@@ -19,9 +19,17 @@ const actions = {
             return res
         })
     },
+    doRegist({ commit }, params) {
+        return api.doRegist(params).then(res => {
+            return res
+        })
+    },
+    doLogout({ commit }, params) {
+        return api.doLogout(params)
+    },
     getUserInfo({ commit }) {
         return api.getUserInfo().then(res => {
-            commit('SET_USER', res.data)
+            commit('SET_USER', res.data || {})
             commit('TOGGLE_LOGIN')
             return res
         })

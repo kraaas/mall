@@ -10,11 +10,23 @@
     <meta name="screen-orientation" content="portrait">
     <meta name="x5-fullscreen" content="true">
     <meta name="360-fullscreen" content="true">
-    <title>移动端商城</title>
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_556485_o2wmqatghojsv2t9.css">
+    <title>胜程在线</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_556485_6eowc3qs1erhehfr.css">
     <script src="../script/api.js"></script>
     <script src="http://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
+    <script src="http://at.alicdn.com/t/font_573098_7upq7q2o2h85mi.js"></script>
+    <style type="text/css">
+      .icon {
+         width:0.72rem; height: 0.72rem;
+         vertical-align: -0.15em;
+         fill: currentColor;
+         overflow: hidden;
+         box-sizing: border-box;
+      }
+      .icon.big {
+         width:1.33rem; height: 1.33rem;
+      }
+    </style>
     <script>
       window.apiready = function() {
         var style = document.createElement('style');
@@ -22,9 +34,12 @@
         style.rel = 'stylesheet';
         var fixTop = api.safeArea.top
         var fixBottom = api.safeArea.bottom
-        style.appendChild(document.createTextNode('.fixStatusBar {padding-top:' + fixTop + 'px!important;}.fixTabBar{padding-bottom:' + fixBottom + 'px!important;box-sizing: content-box;}.fixTabBar .content{margin-top:' +(88 + fixBottom)  + 'px!important;}'));
+        style.appendChild(document.createTextNode('.marginTop{ margin-top:' + fixTop + 'px!important;}.fixStatusBar {padding-top:' + fixTop + 'px!important;box-sizing: content-box;}.fixTabBar{padding-bottom:' + fixBottom + 'px!important;box-sizing: content-box;}'));
         var head = document.getElementsByTagName('head')[0];
         head.appendChild(style);
+        if(api.debug) {
+          eruda.init();
+        }
       }
     </script>
   </head>

@@ -1,15 +1,14 @@
 <template>
   <div class="search">
       <search-header :showBack="true" :showInput="true" />
-      <div class="history-wrap">
+      <div class="history-wrap" v-if="searchLog.length">
         <h3>搜索历史</h3>
         <ul class="history">
-            <li class="history-item">是大方地方</li>
-            <li class="history-item">地方</li>
-            <li class="history-item">规范</li>
-            <li class="history-item">发跟后台</li>
-            <li class="history-item">好久好久</li>
-            <li class="history-item">好几个</li>
+            <li 
+              class="history-item" 
+              v-for="text in searchLog"
+              @click="search(text)"
+            >{{text}}</li>
         </ul>
       </div>
   </div>
@@ -18,7 +17,14 @@
 import SearchHeader from '../common/SearchHeader.vue'
 export default {
   data () {
-    return {}
+    return {
+      searchLog: JSON.parse(localStorage.getItem('searchLog') || '[]')
+    }
+  },
+  methods: {
+    search(searchText) {
+      this.$router.push({path: 'products', query: {searchText}})
+    }
   },
   components: {
     SearchHeader

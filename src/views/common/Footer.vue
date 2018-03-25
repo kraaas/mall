@@ -74,6 +74,7 @@
     position: relative;
     text-align: center;
     color: #666;
+    flex: 1;
   }
   .footer-item-hot {
     color: #b4282d;
@@ -126,6 +127,9 @@
   .cart-badge {
     position: absolute;
     top: 0;
-    right: -30px;
+    right: 20px;
+  }
+  .cart-badge.mint-badge.is-primary{
+    background-color: #ce352d!important;
   }
 </style>

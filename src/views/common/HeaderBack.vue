@@ -4,7 +4,7 @@
         <mt-button slot="left" @click="back" icon="back">返回</mt-button>
         <slot name="right" slot="right"></slot>
     </mt-header>
-    <div class="content">
+    <div class="marginTop content">
       <slot></slot>
     </div>
   </div>
@@ -25,7 +25,7 @@ export default {
 </script>
 <style scoped>
 .content {
-    margin-top: 88px;
+    padding-top: 88px;
 }
 .mint-header.is-fixed {
   z-index: 100;

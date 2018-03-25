@@ -13,11 +13,17 @@
         <span class="placeholder">搜索商品</span>
       </div>
     </router-link>
-    <div class="m-topSearchIpt hasinput" :class="{focused}" v-if="showInput">
+    <form 
+      action="" 
+      class="m-topSearchIpt hasinput" 
+      :class="{focused}" 
+      v-if="showInput"
+      @submit="search"
+    >
       <i class="icon iconfont icon-sousuo"></i>
       <span v-if="!focused" class="placeholder">搜索商品</span>
-      <input type="text" @focus="inputFocus">
-    </div>
+      <input v-model="searchText" type="search" @focus="inputFocus" autofocus>
+    </form>
   </div>
 </template>
 
@@ -28,7 +34,8 @@
     props: ['showBack', 'showInput'],
     data () {
       return {
-        focused: false
+        focused: false,
+        searchText: ''
       }
     },
     computed: {
@@ -38,6 +45,13 @@
       ])
     },
     methods: {
+      search (e) {
+        e.preventDefault()
+        const searchLog = JSON.parse(localStorage.getItem('searchLog') || '[]')
+        searchLog.push(this.searchText)
+        localStorage.setItem('searchLog', JSON.stringify(searchLog))
+        this.$router.push({path: 'products', query: {searchText: this.searchText}})
+      },
       goFooterPath (idx) {
         let curPath = this.$route.path
         let redirectPath = this.footItems[idx].path

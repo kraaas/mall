@@ -4,12 +4,12 @@
       <li class="prod-item-wrap" v-for="(order, index) in orderList" :key="index">
         <router-link 
           class="prod-item" 
-          :to="{name: 'detail', params: {id: item.detail.id}}"
-          v-for="(item, innerIndex) in order.list"
+          :to="{name: 'detail', params: {id: item.detail._id}}"
+          v-for="(item, innerIndex) in order.items"
           :key="innerIndex"
         >
             <div class="img">
-              <img :src="item.detail.banners[0]" alt="">
+              <img :src="`http://api.gdsc198.com:8001/img/${item.detail.image_path[0]}`" alt="">
             </div>
             <div class="info">
               <p>{{item.detail.title}}</p>
@@ -22,10 +22,10 @@
         </router-link>
         <div class="btns">
           <div class="btns-left">
-            <span>{{order.orderDate}}</span>
+            <span>下单时间: {{order.create_time}}</span>
           </div>
           <div class="btns-right">
-            <mt-button @click="cancle" size="small" v-if="order.status === 0">
+            <mt-button @click="cancle(order._id)" size="small" v-if="order.status === 0">
                 取消订单
                 <i slot="icon" class="iconfont icon-lajixiang"></i>
             </mt-button>
@@ -45,7 +45,7 @@
         </div>
       </li>
     </ul>
-    <no-data v-if="!orderList.length" tip="您还没有订单哦"></no-data>
+    <empty v-else tip="您还没有订单哦"></empty>
   </header-back>
 </template>
 <script>
@@ -70,10 +70,10 @@ export default {
     dispatch('getOrderList')
   },
   methods: {
-    cancle() {
+    cancle(id) {
       MessageBox.confirm('确定取消该订单?').then(action => {
         const { dispatch } = this.$store
-        dispatch('cancelOrder').then(() => {
+        dispatch('cancelOrder', {id}).then(() => {
           dispatch('getOrderList')
         })
       })

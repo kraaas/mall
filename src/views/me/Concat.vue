@@ -1,10 +1,13 @@
 <template>
   <header-back title="联系我们">
     <div class="wrap">
+      <h1>联系人</h1>
+      <p>陈俏霖</p>
       <h1>联系电话</h1>
-      <p>13018043002</p>
-      <h1>微信二维码</h1>
-      <p>13018043002</p>
+      <p>
+        <a href="tel:0662-6636328">0662-6636328</a>,
+        <a href="tel:13926381516">13926381516</a>
+      </p>
     </div>
   </header-back>
 </template>
@@ -17,11 +20,12 @@ export default {
 </script>
 <style scoped>
 .wrap {
-  padding: 80px 40px;
-  text-align: center;
+  padding: 80px;
+  background: #fff;
 }
 .wrap h1 {
-  padding: 20px;
+  font-size: 28px;
+  padding: 20px 0;
   color: #666;
 }
 .wrap p {

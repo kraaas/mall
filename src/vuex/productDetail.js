@@ -2,7 +2,9 @@ import api from 'api'
 import * as types from './mutation-types'
 
 const state = {
-    detail: {}
+    detail: {
+        specs: []
+    }
 }
 
 const actions = {

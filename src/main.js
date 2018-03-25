@@ -13,7 +13,7 @@ import VueLazyload from 'vue-lazyload'
 import Mint from 'mint-ui'
 import HeaderBack from './views/common/HeaderBack.vue'
 import CheckBox from './views/common/CheckBox.vue'
-import NoData from './views/common/NoData.vue'
+import Empty from './views/common/Empty.vue'
 import SelectAddress from './views/common/SelectAddress.vue'
 
 Vue.use(VueSwesomeSwiper)
@@ -27,7 +27,7 @@ Vue.use(Mint)
 
 Vue.component(HeaderBack.name, HeaderBack)
 Vue.component(CheckBox.name, CheckBox)
-Vue.component(NoData.name, NoData)
+Vue.component(Empty.name, Empty)
 Vue.component(SelectAddress.name, SelectAddress)
 
 if ('addEventListener' in document) {

@@ -15,6 +15,9 @@ const actions = {
             commit('REMOVE_ADDRESS', index)
         })
     },
+    addAddress({ commit }, params) {
+        return api.addAddress(params)
+    },
     updateAddress({ commit }, params) {
         return api.updateAddress(params)
     },

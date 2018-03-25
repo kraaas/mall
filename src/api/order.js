@@ -12,9 +12,9 @@ api.getOrderList = function (params) {
   return http.request(url, 'get', params)
 }
 
-api.cancelOrder = function (params) {
-  const url = config.apiurl + '/order'
-  return http.request(url, 'put', params)
+api.cancelOrder = function (id) {
+  const url = config.apiurl + '/cancelOrder/' + id
+  return http.request(url, 'post')
 }
 
 export default api

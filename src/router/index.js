@@ -89,7 +89,8 @@ const AppRouter = new Router({
         {
           path: '/home',
           name: 'home',
-          component: Home
+          component: Home,
+          // meta: { requireAuth: true }
         },
         {
           path: '/sort',
@@ -115,14 +116,14 @@ const AppRouter = new Router({
 AppRouter.beforeEach((to, from, next) => {
   window.scrollTo(0, 0)
   if (to.meta.requireAuth) {  // 需要权限,进一步进行判断
-    if (store.state.isLogin) {  // 通过vuex state获取当前的token是否存在
+    if (store.state.user.userInfo.tel) {  // 通过vuex state获取当前的token是否存在
       next()
     }
     else {    //如果没有权限,重定向到登录页,进行登录
-      // next({
-      //   path: '/login',
-      //   query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      // })
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
       next()
     }
   }else { //不需要权限 直接跳转

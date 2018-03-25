@@ -7,11 +7,21 @@ const state = {
 const actions = {
     getOrderList({ commit }, params) {
         api.getOrderList(params).then(res => {
+            res.data.forEach(good => {
+                good.items.forEach(item => {
+                    item.selectedType = item.detail.specs.filter(sepc => {
+                        console.log(sepc._id == item.typeId)
+                        return sepc._id == item.typeId
+                    })[0]
+                    item.totalPrice = item.count * item.selectedType.price
+                })
+            })
             commit('SET_ORDER_LIST', res.data)
         })
     },
-    cancelOrder({ commit }) {
-        return api.cancelOrder()
+    cancelOrder({ commit }, {id }) {
+        console.log(id)
+        return api.cancelOrder(id)
     }
 }
 

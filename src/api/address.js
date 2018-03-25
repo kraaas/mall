@@ -8,13 +8,18 @@ api.getAddressList = function(params) {
 }
 
 api.removeAddress = function(params) {
-    const url = config.apiurl + '/address'
+    const url = config.apiurl + '/address/' + params.id
     return http.request(url, 'delete', params)
 }
 
+api.addAddress = function(params) {
+    const url = config.apiurl + '/addAddress'
+    return http.request(url, 'post', params)
+}
+
 api.updateAddress = function(params) {
-    const url = config.apiurl + '/address'
-    return http.request(url, 'put', params)
+    const url = config.apiurl + '/updateAddress'
+    return http.request(url, 'post', params)
 }
 
 export default api

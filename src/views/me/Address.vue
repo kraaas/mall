@@ -22,7 +22,7 @@
                 编辑
                 <i slot="icon" class="iconfont icon-yijianfankui"></i>
             </mt-button>
-            <mt-button size="small" @click="remove(address.id, index)">
+            <mt-button size="small" @click="remove(address._id, index)">
                 删除
                 <i slot="icon" class="iconfont icon-lajixiang"></i>
             </mt-button>
@@ -30,7 +30,7 @@
         </div>
       </li>
     </ul>
-    <no-data v-if="!addressList.length" tip="暂无地址"></no-data>
+    <empty v-else></empty>
   </header-back>
 </template>
 <script>

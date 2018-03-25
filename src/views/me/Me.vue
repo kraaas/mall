@@ -4,14 +4,14 @@
       <div class="m-profile fixStatusBar">
         <div class="g-row">
           <div class="left">
-            <img class="avatar" v-lazy="userInfo.avatar">
-            <div class="info" v-if="isLogin">
-              <p class="nickname">{{userInfo.name}}</p>
+            <img class="avatar" v-lazy="userInfo.avatar || avatar">
+            <div class="info" v-if="userInfo.tel">
+              <p class="nickname">{{userInfo.name || '请设置您的姓名'}}</p>
               <div class="membershipLevel">
                 <span class="memberTitle0">{{userInfo.tel}}</span>
               </div>
             </div>
-            <div class="info" v-if="!isLogin">
+            <div class="info" v-else>
               <router-link to="login">
                 <p class="nickname">请先登录</p>
               </router-link>
@@ -59,7 +59,7 @@
         </li>
       </ul>
     </div>
-    <div class="g-row" v-if="isLogin">
+    <div class="g-row" v-if="userInfo.tel">
       <div class="w-button" @click="logout">退出登录</div>
     </div>
     <div class="logoutModal" v-if="showModal">
@@ -87,19 +87,18 @@
 <script>
   import * as types from '../../vuex/mutation-types'
   import model from './MeModel'
+  import avatar from '../../assets/images/avatar.png'
 
   export default {
     data () {
       return {
         showModal: false,
+        avatar
       }
     },
     computed: {
       userInfo () {
         return this.$store.state.user.userInfo
-      },
-      isLogin () {
-        return this.$store.state.isLogin
       }
     },
     async created () {
@@ -112,11 +111,11 @@
       logoutCancel () {
         this.showModal = false
       },
-      logoutConfirm () {
-        const { commit } = this.$store
+      async logoutConfirm () {
+        const { commit, dispatch } = this.$store
         this.showModal = false
+        await dispatch('doLogout')
         commit('SET_USER', {})
-        commit('TOGGLE_LOGIN')
         this.$router.replace('/login')
       }
     }
@@ -131,7 +130,7 @@
   }
   .m-profile {
     height: 270px;
-    background-color: #b5272d;
+    background-color: #fff;
     background-size: 100%;
     padding: 0 30px;
     overflow: hidden;
@@ -185,11 +184,11 @@
     overflow: hidden;
   }
   .m-profile .left .info .nickname {
-    color: #fff;
+    color: #8a8787;
     font-size: 36px;
     line-height: 1.2;
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -200,7 +199,7 @@
     vertical-align: middle;
   }
   .m-profile .left .info .membershipLevel span.memberTitle0 {
-    color: #fff;
+    color: #c5bfbf;
   }
   .w-button {
     vertical-align: middle;

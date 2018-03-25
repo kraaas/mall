@@ -1,19 +1,18 @@
 <template>
     <ul class="list">
         <li class="item" v-for="(item, index) in list" :key="index">
-            <router-link :to="{name: 'detail', params: {id: item.id}}" class="good">
+            <router-link :to="{name: 'detail', params: {id: item._id}}" class="good">
                 <div class="hd">
                     <div class="wraper">
-                      <img v-lazy="item.img">
+                      <img v-lazy="`http://api.gdsc198.com:8001/img/${item.image_path[0]}`">
                     </div>
                 </div>
                 <div class="name">{{item.title}}</div>
-                <div class="price">¥{{item.orderPrice}}</div>
+                <div class="price">¥{{item.specs[0].price}}</div>
             </router-link>
         </li>
     </ul>
 </template>
-
 <script>
   export default {
     props: ['list']

@@ -1,6 +1,3 @@
-/**
- * Created by Administrator on 2017/10/9.
- */
 import config from './config'
 import http from './http'
 const api = {}

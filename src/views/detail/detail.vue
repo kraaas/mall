@@ -1,14 +1,14 @@
 <template>
-    <header-back :title="detail.title" class="detail" v-if="detail.title">
+    <header-back :title="detail.title" class="detail">
       <swiper class="banner-swiper" :options="bannerSwiperOption">
-        <swiper-slide class="banner-img" v-for="(banner, index) in detail.banners" :key="index">
-          <img v-lazy="banner" alt="">
+        <swiper-slide class="banner-img" v-for="(banner, index) in detail.image_path" :key="index">
+          <img v-lazy="`http://api.gdsc198.com:8001/img/${banner}`" alt="">
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
       <div class="info">
           <h3 class="info-title">{{detail.title}}</h3>
-          <h3 class="info-price">￥{{selectedType.price.toFixed(2)}}</h3>
+          <h3 class="info-price">￥{{(+selectedType.price).toFixed(2)}}</h3>
       </div>
       <div class="choose">
           <div class="property">
@@ -18,7 +18,7 @@
                     :key="index"
                     class="property-item"
                     :class="{active: index === currentTypeIndex}"
-                    v-for="(type, index) in detail.typeList" 
+                    v-for="(type, index) in detail.specs" 
                     @click="changeType(index)"
                   >
                     {{type.name}}
@@ -36,8 +36,14 @@
       </div>
       <div class="decs">
           <h3 class="decs-title">商品详情</h3>
-          <div class="banner-img" v-for="(img, index) in detail.images" :key="index">
-            <img v-lazy="img" alt="商品图片">
+          <ul class="properties">
+            <li class="prop-item" v-for="prop in detail.properties" :key="prop._id">
+              <span class="prop-name">{{prop.name}}:</span>
+              <span class="prop-content">{{prop.content}}</span>
+            </li>
+          </ul>
+          <div class="banner-img" v-for="(img, index) in detail.detailImgs" :key="index">
+            <img v-lazy="`http://api.gdsc198.com:8001/img/${img}`" alt="">
         </div>
       </div>
       <div class="footer">
@@ -53,10 +59,10 @@
 </template>
 
 <script>
-import model from '../home/HomeModel'
-import { Toast } from 'mint-ui'
+import model from "../home/HomeModel";
+import { Toast } from "mint-ui";
 export default {
-  data () {
+  data() {
     return {
       addressId: null,
       showAddress: false,
@@ -69,65 +75,79 @@ export default {
         updateOnImagesReady: true,
         autoplayDisableOnInteraction: false
       }
-    }
+    };
   },
   computed: {
-    totalPrice () {
-      return this.count * this.selectedType.price
+    totalPrice() {
+      return this.count * this.selectedType.price;
     },
-    detail () {
-      return this.$store.state.productDetail.detail
+    detail() {
+      return this.$store.state.productDetail.detail;
     },
-    selectedType () {
-      return this.detail.typeList[this.currentTypeIndex]
+    selectedType() {
+      const type = this.detail.specs[this.currentTypeIndex];
+      if (type) {
+        return type;
+      } else {
+        return { price: 0 };
+      }
     },
-    orderInfo () {
-        const { selectedType, count, detail, totalPrice, addressId } = this
-        return {
-          selectedType,
-          count,
-          detail,
-          totalPrice,
-          checked: true,
-          addressId
-        }
+    orderInfo() {
+      const { selectedType, count, detail, totalPrice, addressId } = this;
+      return {
+        selectedType,
+        count,
+        detail,
+        totalPrice,
+        checked: true,
+        addressId
+      };
     }
   },
-  created () {
-    const { dispatch } = this.$store
-    const { id } = this.$route.params
-    dispatch('getDetail', { id })
+  created() {
+    const { dispatch } = this.$store;
+    const { id } = this.$route.params;
+    dispatch("getDetail", { id });
   },
-  destroyed () {
-    const { commit } = this.$store
-    commit('CLEAR_DETAIL')
+  destroyed() {
+    const { commit } = this.$store;
+    commit("CLEAR_DETAIL");
   },
   methods: {
-    changeType (index) {
-      this.currentTypeIndex = index
+    changeType(index) {
+      this.currentTypeIndex = index;
     },
-    changeCount () {
-      this.count = Math.max(this.count, 1)
+    changeCount() {
+      this.count = Math.max(this.count, 1);
     },
-    addToCar () {
-        const { commit } = this.$store
-        commit('ADD_TO_CAR', this.orderInfo)
-        Toast({
-            message: '添加购物车成功',
-            iconClass: 'iconfont icon-checked'
-        })
+    addToCar() {
+      const { commit } = this.$store;
+      commit("ADD_TO_CAR", this.orderInfo);
+      Toast({
+        message: "添加购物车成功",
+        iconClass: "iconfont icon-checked"
+      });
     },
-    buy () {
-        this.showAddress = true
+    buy() {
+      this.showAddress = true;
     },
     selectAddress(id) {
-        this.showAddress = false
-        this.addressId = id
-        const { dispatch } = this.$store
-        dispatch('buy', {params: [this.orderInfo], clearCart: false})
+      this.showAddress = false;
+      this.addressId = id;
+      const { dispatch } = this.$store;
+      const order = {
+        addressId: this.orderInfo.addressId,
+        items:[{
+          detail: this.orderInfo.detail._id,
+          typeId: this.orderInfo.selectedType._id,
+          count: this.orderInfo.count
+        }],
+        totalPrice: this.totalPrice
+      }
+      dispatch("buy", { order, clearCart: false });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -136,127 +156,142 @@ export default {
   overflow: hidden;
 }
 .banner-swiper {
-  height: 460px;
+  height: 540px;
 }
 .banner-img img {
   width: 750px;
-  height: 460px;
 }
 .info {
-    background-color: #f3f3f3;
-    border-bottom: 1px solid #d6d6d6;
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #d6d6d6;
 }
 .info-title {
-    font-size: 30px;
+  font-size: 30px;
 }
-.info-title{
-    padding: 30px 20px;
+.info-title {
+  padding: 30px 20px;
 }
 .info-price {
-    padding: 0 20px 20px;
-    font-size: 28px;
-    color: #ce352d;
+  padding: 0 20px 20px;
+  font-size: 28px;
+  color: #ce352d;
 }
-.choose{
-    padding-bottom: 30px;
-    border-bottom: 1px solid #d6d6d6;
+.choose {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #d6d6d6;
 }
 .property {
-    padding: 0 20px;
+  padding: 0 20px;
 }
 .property-title {
-    padding: 30px 0;
+  padding: 30px 0;
 }
 .property-item {
-    display: inline-block;
-    padding: 10px 14px;
-    border: 1px solid #bfbaba;
-    border-radius: 4px;
-    margin-right: 10px;
-    font-size: 22px;
-    color: #5a5959;
-    margin-bottom: 15px;
+  display: inline-block;
+  padding: 10px 14px;
+  border: 1px solid #bfbaba;
+  border-radius: 4px;
+  margin-right: 10px;
+  font-size: 22px;
+  color: #5a5959;
+  margin-bottom: 15px;
 }
 .property-item.active {
-    border-color:#ec9334;
-    color: #ec9334;
+  border-color: #ec9334;
+  color: #ec9334;
 }
 .coun-btn {
-    flex:1;
+  flex: 1;
 }
 .count input {
-    border: 1px solid #b9b5b5;
-    border-radius: 4px;
-    width: 80px;
-    height: 40px;
-    margin: 0 10px;
-    vertical-align: middle;
-    font-size: 28px;
-    padding: 5px;
+  border: 1px solid #b9b5b5;
+  border-radius: 4px;
+  width: 80px;
+  height: 40px;
+  margin: 0 10px;
+  vertical-align: middle;
+  font-size: 28px;
+  padding: 5px;
 }
 .count-btn {
-    font-size: 36px;
-    vertical-align: middle;
-    padding: 10px;
-    color: #757272;
+  font-size: 36px;
+  vertical-align: middle;
+  padding: 10px;
+  color: #757272;
+}
+.decs{
+  padding-bottom: 100px;
 }
 .decs-title {
-    text-align: center;
-    padding: 30px;
-    background: #f3f3f3;
-    border-bottom: 1px solid #d6d6d6;
+  text-align: center;
+  padding: 30px;
+  background: #f3f3f3;
+  border-bottom: 1px solid #d6d6d6;
 }
 .footer {
-    position: fixed;
-    bottom: 0;
-    height: 99px;
-    width: 100%;
-    background-color: #fafafa;
-    border-top: 1px solid #d6d6d6;
-    display: flex;
-    -moz-flex-flow: row nowrap;
-    -ms-flex-flow: row nowrap;
-    flex-flow: row nowrap;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    align-items: center;
-    -ms-flex-pack: distribute;
-    -webkit-justify-content: space-around;
-    -moz-justify-content: space-around;
-    justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  height: 99px;
+  width: 100%;
+  background-color: #fafafa;
+  border-top: 1px solid #d6d6d6;
+  display: flex;
+  -moz-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  -ms-flex-pack: distribute;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  justify-content: space-around;
 }
 .footer-price {
-    flex: 1;
-    padding-left: 20px;
+  flex: 1;
+  padding-left: 20px;
 }
 .footer-price .price {
-    color: #ce352d;
+  color: #ce352d;
 }
 .footer-btn {
-    flex: 1;
-    height: 100%;
-    line-height: 99px;
-    text-align: center;
-    color: #fff;
-    background-color: #ec9334;
+  flex: 1;
+  height: 100%;
+  line-height: 99px;
+  text-align: center;
+  color: #fff;
+  background-color: #ec9334;
 }
 .footer-btn-buy {
-    background-color: #b4292d;
+  background-color: #b4292d;
 }
 .back {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #5a5959;
-    border-radius: 50%;
-    text-align: center;
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
-    opacity: .5;
-    color: #FFF;
-    z-index: 100;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #5a5959;
+  border-radius: 50%;
+  text-align: center;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  opacity: 0.5;
+  color: #fff;
+  z-index: 100;
+}
+.properties {
+  padding: 40px;
+}
+.properties .prop-item {
+  padding: 20px 0;
+}
+.properties .prop-item .prop-name{
+  display: inline-block;
+  width: 30%;
+}
+.properties .prop-item .prop-content{
+  color:#a9a5a5;
 }
 </style>

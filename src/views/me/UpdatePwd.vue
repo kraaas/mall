@@ -25,13 +25,19 @@ export default {
   methods: {
     update () {
       const { oldpwd, newpwd } = this
+      if(!oldpwd || !newpwd) {
+        Toast({message: '请输入密码'})
+        return
+      }
       const { dispatch } = this.$store
-      dispatch('updatePassword', {oldpwd, newpwd}).then(() => {
-        Toast({
+      dispatch('updatePassword', {oldpwd, newpwd}).then((res) => {
+        if(res.code === 0) {
+          Toast({
             message: '修改成功',
             iconClass: 'iconfont icon-checked'
         })
         this.$router.go(-1)
+        }
       })
     }
   }

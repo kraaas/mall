@@ -3,7 +3,7 @@ import http from './http'
 const api = {}
 
 api.getProductList = function (params) {
-  const url = config.apiurl + '/product-list'
+  const url = config.apiurl + '/productList'
   return http.request(url, 'get', params)
 }
 

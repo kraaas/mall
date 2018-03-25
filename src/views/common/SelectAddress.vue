@@ -8,7 +8,7 @@
     >
       <p class="title">请选择收货地址 ({{addressList.length}})</p>
       <ul class="add-wrap" v-if="addressList.length" >
-        <li @click="select(address.id)" class="add-item" v-for="(address, index) in addressList" :key="index">
+        <li @click="select(address._id)" class="add-item" v-for="(address, index) in addressList" :key="index">
           <div class="add-info">
             <span class="name">{{address.name}}</span>
             <span class="tel">{{address.tel}}</span>
@@ -20,6 +20,7 @@
   </div>
 </template>
 <script>
+import { MessageBox } from 'mint-ui'
 export default {
   name: 'select-address',
   props: ['show', 'onselect'],
@@ -30,6 +31,12 @@ export default {
   },
   watch: {
     show(val) {
+      if(val === true && this.addressList.length === 0) {
+        MessageBox.confirm('您还没后添加收货地址，请先添加').then(action => {
+            this.$router.push({ name: 'address' })
+        })
+        return
+      }
       this.visiable = val
     }
   },

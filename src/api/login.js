@@ -31,4 +31,14 @@ Login.doLogin = function (params) {
   return http.request(url, 'post', params)
 }
 
+Login.doLogout = function (params) {
+  let url = config.apiurl + '/logout'
+  return http.request(url, 'post', params)
+}
+
+Login.doRegist = function (params) {
+  let url = config.apiurl + '/regist'
+  return http.request(url, 'post', params)
+}
+
 export default Login
